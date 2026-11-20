@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flyer A5 · EPIC-NON</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<script src="../lib/qrcode.min.js"></script>
+<!-- Page size is set by the script (#page-size) from the chosen format:
+     default        A5 148 x 210 mm, white paper, no bleed, ink-light (home printers)
+     ?format=a4     A4 landscape 297 x 210 mm, two A5 flyers per sheet, cut in the middle
+     ?style=couleur A5 + 3 mm bleed 154 x 216 mm, colour design for a print shop -->
+<style id="page-size">@page { size: 148mm 210mm; margin: 0; }</style>
+<style>
+  /* Grid: 6 columns, 4 mm gutter, 8 mm margin, 4.5 mm baseline. */
+  :root {
+    --bleed: 3mm; --margin: 8mm; --gutter: 4mm; --base: 4.5mm;
+    --paper: #F6F4EF; --ink: #16181B; --ink-soft: #4B5058; --rule: #D8D4CB; --signal: #D52B1E;
+    --p: #1F3F66; --t: #E6EDF5; --on: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; color: var(--ink); background: #8a8a8a; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .toolbar { position: sticky; top: 0; z-index: 5; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding: 10px 16px; background: #1b1b1b; color: #fff; font-size: 14px; }
+  .toolbar select, .toolbar button { font: inherit; padding: 4px 10px; }
+  .toolbar .warn { color: #ffcf5a; }
+  .toolbar .hint { color: #bbb; font-size: 12px; }
+  .stage { display: flex; flex-wrap: wrap; gap: 10mm; justify-content: center; padding: 10mm; }
+  .pair { display: flex; gap: 6mm; flex-wrap: wrap; justify-content: center; }
+  .label { width: 100%; text-align: center; color: #fff; font-size: 12px; }
+
+  /* ================= COLOUR VERSION (?style=couleur) — print shop, 3 mm bleed ================= */
+  .sheet { width: 154mm; height: 216mm; background: var(--paper); position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.35); }
+  .trim { position: absolute; inset: var(--bleed); }
+  .safe { position: absolute; inset: var(--margin); display: flex; flex-direction: column; }
+  .cropmarks .trim { outline: .2mm dashed rgba(0,0,0,.25); }
+
+  /* Type scale 1.333 from 9 pt */
+  .micro { font-size: 7pt; line-height: 9pt; }
+  .body { font-size: 9pt; line-height: 13pt; }
+  .lead { font-size: 12pt; line-height: 16pt; }
+  .h3 { font-size: 13pt; line-height: 16pt; font-weight: 600; }
+  .h1 { font-size: 28.4pt; line-height: 30pt; font-weight: 700; letter-spacing: -.02em; }
+  .caps { text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+
+  /* RECTO */
+  .band, .cta { left: calc(-1 * var(--bleed)) !important; right: calc(-1 * var(--bleed)) !important; }
+  .band { position: absolute; top: 0; height: calc(var(--bleed) + 112mm); background: var(--p); color: var(--on); }
+  .band .safe { top: calc(var(--bleed) + var(--margin)); left: calc(var(--bleed) + var(--margin)); right: calc(var(--bleed) + var(--margin)); bottom: 6mm; justify-content: space-between; }
+  .band .seg { opacity: .85; }
+  .band .hook { max-width: 120mm; }
+  .band .ess { max-width: 118mm; opacity: .95; }
+  .compare { position: absolute; left: calc(var(--bleed) + var(--margin)); right: calc(var(--bleed) + var(--margin)); top: calc(var(--bleed) + 112mm + 7mm); display: grid; grid-template-columns: 1fr 1fr; gap: var(--gutter); }
+  .side { border-top: .6mm solid var(--rule); padding-top: 2.5mm; }
+  .side.ours { border-top-color: var(--p); }
+  .side .k { color: var(--ink-soft); margin-bottom: 1.5mm; }
+  .side.ours .k { color: var(--p); }
+  .proof { position: absolute; left: calc(var(--bleed) + var(--margin)); right: calc(var(--bleed) + var(--margin)); top: calc(var(--bleed) + 112mm + 40mm); color: var(--ink-soft); }
+  .cta { position: absolute; bottom: 0; height: calc(var(--bleed) + 30mm); background: var(--signal); color: #fff; }
+  .cta .safe { top: 6mm; bottom: calc(var(--bleed) + 6mm); left: calc(var(--bleed) + var(--margin)); right: calc(var(--bleed) + var(--margin)); flex-direction: row; align-items: center; justify-content: space-between; gap: 6mm; }
+  .cta .big { font-size: 17pt; line-height: 19pt; font-weight: 700; }
+  .cta .url { font-size: 12pt; font-weight: 600; white-space: nowrap; }
+
+  /* VERSO */
+  .verso .safe { top: calc(var(--bleed) + var(--margin)); left: calc(var(--bleed) + var(--margin)); right: calc(var(--bleed) + var(--margin)); bottom: calc(var(--bleed) + var(--margin)); gap: 4.5mm; }
+  .vhead { display: flex; justify-content: space-between; align-items: baseline; border-bottom: .6mm solid var(--p); padding-bottom: 2mm; }
+  .vhead .caps { color: var(--p); }
+  .pt { display: grid; grid-template-columns: 6mm 1fr; gap: 0 3mm; }
+  .pt .n { width: 6mm; height: 6mm; border-radius: 0; background: var(--p); color: var(--on); font-size: 8pt; font-weight: 700; display: grid; place-items: center; margin-top: .5mm; }
+  .pt .mini { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 1.5mm; }
+  .pt .mini div { background: var(--t); padding: 1.6mm 2mm; border-radius: 0; }
+  .pt .mini div:first-child { background: #ECEAE4; }
+  .pt .mini b { display: block; font-size: 7pt; line-height: 9pt; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-soft); }
+  .pt .mini div:last-child b { color: var(--p); }
+  .howto { margin-top: auto; display: grid; grid-template-columns: 1fr 30mm; gap: 5mm; align-items: end; border-top: .3mm solid var(--rule); padding-top: 3.5mm; }
+  .howto ol { list-style: none; counter-reset: s; }
+  .howto li { counter-increment: s; position: relative; padding-left: 6mm; margin-bottom: 1mm; }
+  .howto li::before { content: counter(s); position: absolute; left: 0; top: .2mm; width: 4.2mm; height: 4.2mm; border-radius: 0; background: var(--signal); color: #fff; font-size: 6.5pt; font-weight: 700; display: grid; place-items: center; }
+  .qr { text-align: center; }
+  .qr svg { width: 26mm; height: 26mm; display: block; margin: 0 auto 1mm; }
+  .closer { font-weight: 600; color: var(--p); }
+  .imprint { color: var(--ink-soft); }
+  .tbc { background: #fff3a3; }
+
+  /* Display roles in Plex Sans Condensed Bold */
+  .h1, .h3, .cta .big, .pt .n, .howto li::before { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; }
+  .h1 { font-size: 31pt; line-height: 31pt; letter-spacing: -.015em; }
+  .h3 { letter-spacing: -.005em; }
+  .side { border-top-width: .8mm; }
+
+  /* ================= INK-LIGHT VERSION (default) — home printers =================
+     White paper, black text, no fills, no bleed. Everything sits 8 mm inside the trim.
+     The segment colour only marks a 3 mm square and one thin rule; every piece of
+     information is also carried by text, weight or position (reads the same in grayscale). */
+  .sheet.ink { width: 148mm; height: 210mm; background: #fff; color: #000; }
+  .ink .k-safe { position: absolute; inset: var(--margin); display: flex; flex-direction: column; }
+  .ink .cond { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700; }
+  .ink .k-kicker { display: flex; justify-content: space-between; align-items: center; gap: 4mm; font-size: 7.5pt; line-height: 10pt; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; border-bottom: .3mm solid #000; padding-bottom: 2mm; }
+  .ink .k-seg { display: inline-flex; align-items: center; gap: 1.8mm; text-align: right; }
+  .ink .k-sq { width: 3mm; height: 3mm; background: var(--p); flex: none; }
+  .ink .k-src { font-size: 7pt; line-height: 9.5pt; color: #000; }
+  .nw { white-space: nowrap; }
+  .ink sup, .sheet sup { font-size: .62em; line-height: 0; vertical-align: .55em; }
+
+  /* Recto */
+  .ink .k-hook { font-size: 40pt; line-height: 41pt; letter-spacing: -.015em; margin-top: 9mm; max-width: 130mm; text-wrap: balance; }
+  .ink .k-hero { display: grid; grid-template-columns: 8mm 1fr; gap: 0 2mm; align-items: baseline; margin-top: 8mm; padding-top: 3mm; border-top: .2mm solid #000; }
+  .ink .k-hero h2 { font-size: 16pt; line-height: 19pt; }
+  .ink .k-lead { font-size: 13pt; line-height: 18pt; margin-top: 2mm; max-width: 124mm; text-wrap: pretty; }
+  .ink .k-compare { display: grid; grid-template-columns: 1fr 1fr; margin-top: 7mm; }
+  .ink .k-side { border-top: .3mm solid #000; padding: 2.5mm 4mm 0 0; }
+  .ink .k-side + .k-side { border-left: .3mm solid #000; padding: 2.5mm 0 0 4mm; }
+  .ink .k-side.ours { border-top: .8mm solid var(--p); padding-top: 2mm; }
+  .ink .k-lab { font-size: 7.5pt; line-height: 10pt; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; margin-bottom: 1.5mm; }
+  .ink .k-side p { font-size: 12.5pt; line-height: 16.5pt; text-wrap: pretty; }
+  .ink .k-side.ours p { font-weight: 600; }
+  .ink.recto .k-src { margin-top: 4mm; font-size: 7.5pt; line-height: 10pt; }
+  .ink .k-next { margin-top: auto; padding-top: 6mm; }
+  .ink .k-next .k-lab { margin-bottom: 1mm; }
+  .ink .k-next ol { list-style: none; border-top: .2mm solid #000; }
+  .ink .k-next li { display: grid; grid-template-columns: 8mm 1fr; gap: 0 2mm; align-items: baseline; padding: 1.6mm 0; border-bottom: .2mm solid #000; font-size: 12pt; line-height: 14pt; }
+  .ink .k-next li .n { font-size: 12pt; }
+  .ink .k-next li .t { font-weight: 500; }  /* lighter: keeps the recto under 10 % ink */
+  .ink .k-foot { margin-top: 7mm; border-top: .6mm solid #000; padding-top: 3mm; display: flex; justify-content: space-between; align-items: flex-end; gap: 6mm; }
+  .ink .k-deadline { font-size: 19pt; line-height: 21pt; }
+  .ink .k-thr { font-size: 8.5pt; line-height: 11pt; margin-top: 1mm; max-width: 96mm; text-wrap: balance; }
+  .ink .k-url { font-size: 13pt; line-height: 16pt; font-weight: 700; text-align: right; white-space: nowrap; }
+  .ink .k-url small { display: block; font-size: 7.5pt; line-height: 10pt; font-weight: 400; }
+
+  /* Verso */
+  .ink .k-points { list-style: none; margin-top: 1mm; }
+  .ink .k-points li { display: grid; grid-template-columns: 8mm 1fr; gap: 0 2mm; padding: 2.6mm 0 2.6mm; border-bottom: .2mm solid #000; }
+  .ink .k-n { font-size: 17pt; line-height: 17pt; padding-top: .3mm; }
+  .ink .k-points h3 { font-size: 13pt; line-height: 15pt; margin-bottom: .8mm; }
+  .ink .k-points p.e { font-size: 9.5pt; line-height: 12.5pt; text-wrap: pretty; }
+  .ink .k-points .k-src { margin-top: 1.2mm; }
+  .ink .k-mini { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.6mm; font-size: 8.5pt; line-height: 11pt; }
+  .ink .k-mini > div { padding: 1.2mm 3mm 0 0; border-top: .2mm solid #000; }
+  .ink .k-mini > div + div { padding: 1.2mm 0 0 3mm; border-left: .2mm solid #000; }
+  .ink .k-mini > div.ours { font-weight: 600; }
+  .ink .k-mini > div { text-wrap: pretty; }
+  .ink .k-mini b { display: block; font-size: 7pt; line-height: 9pt; text-transform: uppercase; letter-spacing: .07em; font-weight: 600; }
+  .ink .k-sign { margin-top: auto; display: grid; grid-template-columns: 1fr 34mm; gap: 6mm; border-top: .6mm solid #000; padding-top: 2.6mm; }
+  .ink .k-sign h3 { font-size: 13pt; line-height: 15pt; margin-bottom: 1.5mm; }
+  .ink .k-steps ol { list-style: none; counter-reset: s; font-size: 8.5pt; line-height: 11.5pt; }
+  .ink .k-steps li { counter-increment: s; position: relative; padding-left: 5mm; margin-bottom: .8mm; }
+  .ink .k-steps li::before { content: counter(s) "."; position: absolute; left: 0; font-weight: 700; }
+  .ink .k-thr2 { font-size: 7.5pt; line-height: 10pt; color: #000; margin-top: 1.5mm; }
+  .ink .k-qr { text-align: center; }
+  .ink .k-qr svg { width: 30mm; height: 30mm; display: block; margin: -1.5mm auto 0; }  /* includes a 4-module white quiet zone */
+  .ink .k-qr .qr-missing { width: 30mm; height: 30mm; margin: 0 auto; border: .3mm dashed #000; display: grid; place-items: center; font-size: 7pt; }
+  .ink .k-qr .u { font-size: 10.5pt; line-height: 13pt; font-weight: 700; }
+  .ink .k-qr .d { font-size: 11pt; line-height: 12.5pt; margin-top: 1.5mm; text-wrap: balance; }
+  .ink .k-closer { font-size: 14pt; line-height: 17pt; margin-top: 3.5mm; }
+  .ink .k-imprint { font-size: 7.5pt; line-height: 10pt; color: #000; margin-top: 1.5mm; }
+
+  /* ================= A4 two-up (?format=a4) ================= */
+  .a4 { width: 297mm; height: 210mm; background: #fff; position: relative; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.35); }
+  .a4 .slot { position: absolute; top: 0; }
+  .a4 .slot.l { left: .25mm; } .a4 .slot.r { left: 148.75mm; }
+  .a4 .sheet { box-shadow: none; }
+  .a4 .cut { position: absolute; left: 148.4mm; top: 0; bottom: 0; width: 0; border-left: .2mm dashed #9a9a9a; }
+  .a4 .cut::before, .a4 .cut::after { content: ''; position: absolute; left: -.25mm; width: .3mm; height: 5mm; background: #9a9a9a; }
+  .a4 .cut::before { top: 5mm; } .a4 .cut::after { bottom: 5mm; }  /* inside the printable area of home printers */
+  .a4 .cutlabel { position: absolute; left: 149.5mm; top: 100mm; font-size: 6pt; color: #9a9a9a; writing-mode: vertical-rl; letter-spacing: .1em; text-transform: uppercase; }
+
+  body.bare { background: transparent; overflow: hidden; }
+  body.bare .toolbar, body.bare .label { display: none; }
+  body.bare .stage { display: block; padding: 0; }
+  body.bare .sheet { box-shadow: none; }
+  @media print {
+    body { background: none; }
+    .toolbar, .label { display: none; }
+    .stage, .pair { display: block; padding: 0; gap: 0; }
+    .sheet, .a4 { box-shadow: none; page-break-after: always; break-after: page; }
+    .a4 .sheet { page-break-after: auto; break-after: auto; }
+    .cropmarks .trim { outline: none; }
+  }
+</style>
+</head>
+<body>
+<style>@media print{.preview-banner{display:none!important}}.bare .preview-banner,.embed .preview-banner{display:none!important}</style><div class="preview-banner" style="position:sticky;top:0;z-index:99;background:#fff3a3;color:#16181B;font:600 14px/1.4 system-ui,sans-serif;padding:6px 16px;text-align:center">Aperçu de travail, à ne pas diffuser · <a href="../../index.html" style="color:inherit">retour à l'aperçu</a></div>
+<div class="toolbar">
+  <label>Segment <select id="seg"></select></label>
+  <label>Format <select id="fmt">
+    <option value="a5">A5 recto/verso, à imprimer chez soi</option>
+    <option value="a4">A4 : 2 flyers par feuille, à couper</option>
+    <option value="couleur">Version couleur, pour imprimeur (fond perdu)</option>
+  </select></label>
+  <label><input type="checkbox" id="all"> Tous les segments</label>
+  <label id="marks-l"><input type="checkbox" id="marks" checked> Repère de coupe</label>
+  <button id="print">Imprimer / PDF</button>
+  <span class="hint" id="hint"></span>
+  <span class="warn" id="warn"></span>
+</div>
+<div class="stage" id="stage"></div>
+
+<script type="module">
+import { loadSystem, pendingConfirmations } from '../lib/data.js?v=7';
+const sys = await loadSystem();
+const $ = s => document.querySelector(s);
+// esc() also sets French print typography at render time (points.json stays untouched):
+// typographic apostrophe, number + word kept together, hyphenated words kept on one line, 1er as superscript.
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+  .replace(/(\p{L})'(?=\p{L})/gu, '$1\u2019')
+  .replace(/(\d) (?=\p{L})/gu, '$1\u00A0')
+  .replace(/\b1er\b/g, '1<sup>er</sup>')
+  .replace(/(?<![\p{L}.])(\p{L}+(?:-\p{L}+)+)(?![\p{L}.])/gu, '<span class="nw">$1</span>');
+// The right side of a comparison is the committee's position, except for neutral pairs (e.g. two audits).
+const isOurs = p => /nous|choisi|garantie|refusé|romand|libres/i.test(p.compare.right.label);
+
+const params = new URLSearchParams(location.search);
+const sel = $('#seg');
+sys.segmentIds.forEach(id => sel.add(new Option(sys.tokens.segments[id].label, id)));
+sel.value = params.get('segment') || 'secret';
+$('#all').checked = params.get('all') === '1';
+// Format: default = ink-light A5. ?format=a4 (or ?sheet=a4) = two-up on A4. ?style=couleur = print-shop colour version.
+const initialFmt = params.get('style') === 'couleur' ? 'couleur'
+  : (params.get('format') === 'a4' || params.get('sheet') === 'a4') ? 'a4' : 'a5';
+$('#fmt').value = initialFmt;
+
+const PAGE = { a5: '148mm 210mm', a4: '297mm 210mm', couleur: '154mm 216mm' };
+const HINT = {
+  a5: 'Imprimer à 100 % (taille réelle), recto-verso. Aucune couleur de fond : peu d’encre.',
+  a4: 'Papier A4, paysage, 100 %, recto-verso retourné sur le bord court. Couper au milieu.',
+  couleur: 'Pour imprimeur : A5 + 3 mm de fond perdu, RVB.',
+};
+
+// QR: black on white with the 4-module quiet zone of the spec built into the SVG.
+// If the QR library did not load, print a visible placeholder and flag it (build.sh then warns).
+let qrError = null;
+function qrSvg(text) {
+  try {
+    const q = qrcode(0, 'M'); q.addData(text); q.make();
+    return q.createSvgTag({ cellSize: 4, margin: 16, scalable: true });
+  } catch (e) {
+    qrError = 'QR non généré (bibliothèque qrcode absente)';
+    return `<div class="qr-missing">QR manquant</div>`;
+  }
+}
+const tbc = p => p.source && p.source.tbc ? ` <span class="tbc">à confirmer : ${esc(p.source.tbc)}</span>` : '';
+
+// ---------- Colour version (print shop, unchanged design) ----------
+function colourPair(seg) {
+  const s = sys.resolve(seg), c = s.color, camp = sys.lib.campaign, h = s.hero;
+  const vars = `--p:${c.primary};--t:${c.tint};--on:${c.onPrimary}`;
+  const recto = `
+  <div class="sheet recto" style="${vars}"><div class="trim">
+    <div class="band" style="top:calc(-1 * var(--bleed))"><div class="safe">
+      <div class="micro caps seg">Référendum cantonal · Vaud — ${esc(c.label)}</div>
+      <div>
+        <h1 class="h1 hook">${esc(s.hook)}</h1>
+        <p class="lead ess" style="margin-top:4.5mm">${esc(h.essential)}</p>
+      </div>
+    </div></div>
+    <div class="compare">
+      <div class="side"><div class="micro caps k">${esc(h.compare.left.label)}</div><p class="h3" style="font-weight:400">${esc(h.compare.left.text)}</p></div>
+      <div class="side ours"><div class="micro caps k">${esc(h.compare.right.label)}</div><p class="h3">${esc(h.compare.right.text)}</p></div>
+    </div>
+    <p class="proof micro">Source\u202F: ${esc(h.source.text)}.${tbc(h)}</p>
+    <div class="cta" style="bottom:calc(-1 * var(--bleed))"><div class="safe">
+      <div class="big">${esc(camp.deadlineLabel)}</div>
+      <div class="url">${esc(camp.url)}</div>
+    </div></div>
+  </div></div>`;
+  const verso = `
+  <div class="sheet verso" style="${vars}"><div class="trim"><div class="safe">
+    <div class="vhead"><span class="micro caps">L'essentiel en ${s.rest.length} points</span><span class="micro">${esc(c.audience)}</span></div>
+    ${s.rest.map((p, i) => `
+    <div class="pt"><div class="n">${i + 1}</div><div>
+      <h3 class="h3">${esc(p.title)}</h3>
+      <p class="body">${esc(p.essential)}</p>
+      <div class="mini body"><div><b>${esc(p.compare.left.label)}</b>${esc(p.compare.left.text)}</div><div><b>${esc(p.compare.right.label)}</b>${esc(p.compare.right.text)}</div></div>
+      <p class="micro imprint" style="margin-top:1mm">Source\u202F: ${esc(p.source.text)}.${tbc(p)}</p>
+    </div></div>`).join('')}
+    <div class="howto">
+      <div>
+        <p class="h3" style="margin-bottom:2mm">Comment signer</p>
+        <ol class="body">${sys.lib.steps.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
+        <p class="body closer" style="margin-top:2mm">${esc(sys.lib.closer)}</p>
+      </div>
+      <div class="qr">${qrSvg(s.qr)}<div class="micro">Feuille et infos :<br><b>${esc(camp.url)}</b></div></div>
+    </div>
+    <p class="micro imprint">${esc(camp.signer)}</p>
+  </div></div></div>`;
+  return { recto, verso, s };
+}
+
+// ---------- Ink-light version (default, home printers) ----------
+function inkPair(seg) {
+  const s = sys.resolve(seg), c = s.color, camp = sys.lib.campaign, h = s.hero;
+  const kicker = left => `<div class="k-kicker"><span>${left}</span><span class="k-seg"><i class="k-sq"></i>${esc(c.label)}</span></div>`;
+  const recto = `
+  <div class="sheet ink recto" style="--p:${c.primary}"><div class="k-safe">
+    ${kicker('Référendum cantonal vaudois')}
+    <h1 class="k-hook cond">${esc(s.hook)}</h1>
+    <div class="k-hero"><span class="k-n cond">1</span><h2 class="cond">${esc(h.title)}</h2></div>
+    <p class="k-lead">${esc(h.essential)}</p>
+    <div class="k-compare">
+      <div class="k-side"><div class="k-lab">${esc(h.compare.left.label)}</div><p>${esc(h.compare.left.text)}</p></div>
+      <div class="k-side${isOurs(h) ? ' ours' : ''}"><div class="k-lab">${esc(h.compare.right.label)}</div><p>${esc(h.compare.right.text)}</p></div>
+    </div>
+    <p class="k-src">Source\u202F: ${esc(h.source.text)}.${tbc(h)}</p>
+    <div class="k-next"><div class="k-lab">Au verso, ${s.rest.length} autres points</div>
+      <ol>${s.rest.map((p, i) => `<li><span class="n cond">${i + 2}</span><span class="cond t">${esc(p.title)}</span></li>`).join('')}</ol>
+    </div>
+    <div class="k-foot">
+      <div><div class="k-deadline cond">${esc(camp.deadlineLabel)}</div><div class="k-thr">${esc(camp.thresholdLabel)}.</div></div>
+      <div class="k-url">${esc(camp.url)}<small>Au verso\u202F: comment signer</small></div>
+    </div>
+  </div></div>`;
+  const verso = `
+  <div class="sheet ink verso" style="--p:${c.primary}"><div class="k-safe">
+    ${kicker(`L\u2019essentiel, points 2 à ${s.points.length}`)}
+    <ol class="k-points">${s.rest.map((p, i) => `
+      <li><span class="k-n cond">${i + 2}</span><div>
+        <h3 class="cond">${esc(p.title)}</h3>
+        <p class="e">${esc(p.essential)}</p>
+        <div class="k-mini"><div><b>${esc(p.compare.left.label)}</b>${esc(p.compare.left.text)}</div><div${isOurs(p) ? ' class="ours"' : ''}><b>${esc(p.compare.right.label)}</b>${esc(p.compare.right.text)}</div></div>
+        <p class="k-src">Source\u202F: ${esc(p.source.text)}.${tbc(p)}</p>
+      </div></li>`).join('')}
+    </ol>
+    <div class="k-sign">
+      <div class="k-steps">
+        <h3 class="cond">Comment signer</h3>
+        <ol>${sys.lib.steps.map(t => `<li>${esc(t)}</li>`).join('')}</ol>
+        <p class="k-thr2">${esc(camp.thresholdLabel)}.</p>
+      </div>
+      <div class="k-qr">${qrSvg(s.qr)}<div class="u">${esc(camp.url)}</div><div style="font-size:7.5pt;line-height:10pt">feuille de signatures et infos</div></div>
+    </div>
+    <p class="k-closer cond">${esc(sys.lib.closer)}</p>
+    <p class="k-imprint">${esc(camp.signer)}</p>
+  </div></div>`;
+  return { recto, verso, s };
+}
+
+const pairFor = (seg, fmt) => fmt === 'couleur' ? colourPair(seg) : inkPair(seg);
+
+// Two identical A5 flyers side by side on A4 landscape; page 2 holds the two versos.
+// Both halves carry the same flyer, so a short-edge duplex flip lines each verso up behind a recto.
+const a4Page = (a, b) => `<div class="a4"><div class="slot l">${a}</div><div class="slot r">${b}</div><div class="cut"></div><div class="cutlabel">couper</div></div>`;
+
+// Shrink a headline that would run past 4 lines, and report any block that overflows its safe area.
+function fitAndCheck(root) {
+  root.querySelectorAll('.k-hook').forEach(el => {
+    let pt = 40;
+    const lines = () => Math.round(el.getBoundingClientRect().height / parseFloat(getComputedStyle(el).lineHeight));
+    const set = () => { el.style.fontSize = pt + 'pt'; el.style.lineHeight = (pt * 1.03) + 'pt'; };
+    while (lines() > 4 && pt > 26) { pt -= 1; set(); }
+    // A long hook may still push the recto past its safe area: shrink it a little more.
+    const safe = el.closest('.k-safe');
+    const tooTall = () => safe.lastElementChild.getBoundingClientRect().bottom > safe.getBoundingClientRect().bottom + 0.5;
+    while (tooTall() && pt > 28) { pt -= 1; set(); }
+  });
+  // Colour verso: if the three points run long, tighten the space between blocks (4.5 → 2.5 mm) before reporting.
+  root.querySelectorAll('.sheet.verso:not(.ink) > .trim > .safe').forEach(el => {
+    const last = () => el.lastElementChild.getBoundingClientRect().bottom - el.getBoundingClientRect().bottom;
+    let gap = 4.5;
+    while (last() > 0.5 && gap > 2.5) { gap -= 0.25; el.style.gap = gap + 'mm'; }
+  });
+  const over = [];
+  if (qrError) over.push(qrError);
+  root.querySelectorAll('.k-safe, .safe').forEach(el => {
+    const box = el.getBoundingClientRect();
+    const last = el.lastElementChild?.getBoundingClientRect();
+    if (el.scrollHeight > el.clientHeight + 1 || el.scrollWidth > el.clientWidth + 1 || (last && last.bottom > box.bottom + 0.5)) {
+      const mm = ((Math.max(el.scrollHeight - el.clientHeight, (last?.bottom || 0) - box.bottom)) / 3.7795).toFixed(1);
+      over.push((el.closest('.sheet')?.className || '') + ' ' + (el.closest('[data-seg]')?.dataset.seg || sel.value) + ` (+${mm} mm)`);
+    }
+  });
+  window.__overflow = over;
+  document.body.dataset.overflow = over.length ? over.join(' | ') : 'none';  // read by build.sh (--dump-dom)
+  return over;
+}
+
+function setPage(fmt) { $('#page-size').textContent = `@page { size: ${PAGE[fmt]}; margin: 0; }`; }
+
+// Bare mode (?sheet=recto|verso&bare=1): one sheet, nothing else. Used by the studio previews and the PNG export.
+const bareSheet = params.get('bare') === '1' && ['recto', 'verso'].includes(params.get('sheet')) ? params.get('sheet') : null;
+if (bareSheet) {
+  document.body.classList.add('bare');
+  const { recto, verso } = pairFor(sel.value, initialFmt === 'couleur' ? 'couleur' : 'a5');
+  $('#stage').innerHTML = bareSheet === 'verso' ? verso : recto;
+  await document.fonts.ready;
+  fitAndCheck($('#stage'));
+  window.__ready = true;
+}
+
+function render() {
+  const fmt = $('#fmt').value;
+  setPage(fmt);
+  const segs = $('#all').checked ? sys.segmentIds : [sel.value];
+  const pending = new Set();
+  $('#stage').innerHTML = segs.map(seg => {
+    const { recto, verso, s } = pairFor(seg, fmt);
+    pendingConfirmations(s.points).forEach(x => pending.add(x));
+    if (fmt === 'a4') return `<div class="pair" data-seg="${seg}"><div class="label">${esc(s.color.label)} — A4, 2 par feuille (page 1 rectos, page 2 versos)</div>${a4Page(recto, recto)}${a4Page(verso, verso)}</div>`;
+    return `<div class="pair" data-seg="${seg}"><div class="label">${esc(s.color.label)} — recto / verso</div>${recto}${verso}</div>`;
+  }).join('');
+  $('#stage').classList.toggle('cropmarks', fmt === 'couleur' && $('#marks').checked);
+  $('#marks-l').hidden = fmt !== 'couleur';
+  $('#hint').textContent = HINT[fmt];
+  const over = fitAndCheck($('#stage'));
+  $('#warn').textContent = [
+    pending.size ? `${pending.size} fait(s) à confirmer avant impression` : '',
+    over.length ? `Texte trop long : ${over.join(', ')}` : '',
+  ].filter(Boolean).join(' · ');
+  const u = new URL(location);
+  u.searchParams.set('segment', sel.value); u.searchParams.set('all', $('#all').checked ? '1' : '0');
+  u.searchParams.delete('sheet'); u.searchParams.delete('format'); u.searchParams.delete('style');
+  if (fmt === 'a4') u.searchParams.set('format', 'a4');
+  if (fmt === 'couleur') u.searchParams.set('style', 'couleur');
+  history.replaceState(null, '', u);
+  const name = { a5: 'Flyer A5', a4: 'Flyers A4 2 par feuille', couleur: 'Flyer A5 couleur imprimeur' }[fmt];
+  document.title = `${name} · ${$('#all').checked ? 'tous' : sel.value} · EPIC-NON`;
+}
+[sel, $('#all'), $('#marks'), $('#fmt')].forEach(el => el.addEventListener('change', render));
+$('#print').onclick = () => window.print();
+if (!bareSheet) {
+  await document.fonts.ready;
+  render();
+  window.__ready = true;
+}
+</script>
+</body>
+</html>

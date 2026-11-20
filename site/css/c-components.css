@@ -1,0 +1,147 @@
+/* package c-components
+   Comparison (.cmp), point cards (.point), footnotes (.fn), audience tiles (.tile).
+   Markup comes from the "--- Library ---" block of site.js. Segment colours arrive as
+   --p (primary), --t (tint), --on-p (text on primary); tiles use --tp, --ton, --tcut. */
+
+.point, .cmp, .tile { --c-ease: cubic-bezier(.16,1,.3,1); --c-line: color-mix(in srgb, var(--ink) 22%, transparent); }
+
+/* ===== #4 Comparison: status quo struck and muted | ≠ on the seam | what we ask in full colour ===== */
+.cmp.cmp { display: grid; grid-template-columns: minmax(0, 1fr) 0 minmax(0, 1fr); gap: 0; align-items: stretch; position: relative; }
+.cmp.cmp.cmp::after { content: none; display: none; }
+
+.cmp > div.cmp-l, .cmp > div.cmp-r { padding: 1rem 1.9rem 1.1rem 1.1rem; min-width: 0; }
+.cmp > div.cmp-r { padding: 1rem 1.1rem 1.1rem 1.9rem; }
+
+/* Left: what happens with Epic. Paler, lighter, struck label. */
+.cmp > div.cmp-l { background: transparent; border: 1.5px solid var(--c-line); border-right: 0; color: var(--soft); }
+.cmp > div.cmp-l b {
+  color: var(--soft); font-weight: 500; text-decoration: line-through; text-decoration-thickness: 1.5px;
+  text-decoration-color: color-mix(in srgb, var(--soft) 80%, transparent);
+}
+.cmp > div.cmp-l span { font-weight: 400; font-size: 1rem; line-height: 1.4; color: var(--soft); }
+
+/* Right: what we ask. Solid segment colour, heavier type. */
+.cmp > div.cmp-r { background: var(--p); color: var(--on-p, #fff); }
+.cmp > div.cmp-r b { color: var(--on-p, #fff); opacity: .82; font-weight: 600; }
+.cmp > div.cmp-r span { font-size: var(--fs-4); font-weight: 700; line-height: 1.3; color: var(--on-p, #fff); }
+
+.cmp b { font-size: var(--fs-5); letter-spacing: .08em; text-transform: uppercase; margin-bottom: .35rem; display: block; }
+
+/* The seam badge: square, Condensed, on the exact seam (zero-width middle track). */
+.cmp-x {
+  grid-column: 2; grid-row: 1; justify-self: start; align-self: center; z-index: 2;
+  width: 2.75rem; height: 2.75rem; margin-left: -1.375rem;
+  display: grid; place-items: center; background: var(--ink); color: var(--paper);
+  font: 700 2rem/1 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-style: normal;
+  box-shadow: 0 0 0 3px var(--paper);
+}
+.band .cmp-x { box-shadow: 0 0 0 3px var(--surface); }
+.band .point .cmp-x { box-shadow: 0 0 0 3px var(--paper); }
+#vote-cmp .cmp-x { font-size: 1.15rem; letter-spacing: .02em; padding-bottom: .12em; }
+
+/* Pair mode: two facts side by side (nothing struck, nothing "wins"). */
+.cmp.cmp-pair > div.cmp-l, .cmp.cmp-pair > div.cmp-r { background: transparent; color: var(--ink); border: 1.5px solid var(--c-line); }
+.cmp.cmp-pair > div.cmp-l { border-right: 0; }
+.cmp.cmp-pair > div.cmp-r { border-left: 0; }
+.cmp.cmp-pair > div b { text-decoration: none; color: var(--soft); opacity: 1; font-weight: 600; }
+.cmp.cmp-pair > div span { color: var(--ink); font-size: 1rem; font-weight: 600; }
+
+/* Vote block on the home page (signal red for the refusal side, set by script). */
+#vote-cmp > div.cmp-l { background: transparent; color: var(--soft); padding: 1.3rem 2rem 1.4rem 1.3rem; }
+#vote-cmp > div.cmp-r { background: var(--p); color: var(--on-p); padding: 1.3rem 1.3rem 1.4rem 2rem; }
+#vote-cmp .cmp-r b { color: var(--on-p); }
+#vote-cmp span { font-size: var(--fs-4); }
+#vote-cmp .cmp-r span { font-size: var(--fs-4); }
+
+@media (prefers-color-scheme: dark) {
+  .cmp > div.cmp-r { background: var(--p); box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--p), #fff 18%); }
+  .cmp > div.cmp-r b { color: var(--on-p, #fff); }
+  .cmp.cmp-pair > div.cmp-r { box-shadow: none; }
+}
+
+/* Stacked (narrow): the badge sits on the horizontal seam, at the right where labels never run. */
+@media (max-width: 34rem) {
+  .cmp.cmp { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 0 auto; }
+  .cmp-x { grid-column: 1; grid-row: 2; justify-self: end; align-self: start; margin: -1.375rem 1rem 0 0; }
+  .cmp > div.cmp-l, .cmp > div.cmp-r,
+  #vote-cmp > div.cmp-l, #vote-cmp > div.cmp-r { padding: 1rem 4.2rem 1.1rem 1.1rem; }
+  .cmp > div.cmp-r, #vote-cmp > div.cmp-r { padding: 1.3rem 1.1rem 1.1rem 1.1rem; }
+  .cmp > div.cmp-l, #vote-cmp > div.cmp-l { border-right: 1.5px solid var(--c-line); border-bottom: 0; }
+  .cmp.cmp-pair > div.cmp-r { border-left: 1.5px solid var(--c-line); }
+}
+
+/* ===== #9 Point cards: colour tab on the top edge ===== */
+.point.point {
+  display: flex; flex-direction: column; position: relative;
+  --pt-pad: 1.4rem; border: 1.5px solid var(--rule); border-top: 3px solid var(--p); padding: 0 var(--pt-pad) 1.2rem;
+  transition: none; box-shadow: none;
+}
+.point.point:hover { transform: none; box-shadow: none; }
+@media (prefers-color-scheme: dark) { .point.point { border-top-color: color-mix(in srgb, var(--p), #fff 18%); } }
+.pt-tab {
+  align-self: flex-start; max-width: calc(100% + var(--pt-pad));
+  margin: 0 0 1.15rem calc(-1 * var(--pt-pad) - 1.5px); padding: .42rem .85rem .48rem calc(var(--pt-pad) + 1.5px);
+  background: var(--p); color: var(--on-p, #fff);
+  font-size: var(--fs-5); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; line-height: 1.3;
+}
+@media (prefers-color-scheme: dark) { .pt-tab { box-shadow: inset 0 -1.5px 0 color-mix(in srgb, var(--p), #fff 18%), inset -1.5px 0 0 color-mix(in srgb, var(--p), #fff 18%); } }
+.point h3 { font-size: var(--fs-3); margin-bottom: .4em; }
+.point .ess { font-size: var(--fs-4); line-height: 1.45; margin-bottom: 1.2rem; }
+.point .cmp { margin-bottom: 1rem; }
+.point > .cmp + * { margin-top: auto; }
+/* Opponents' line above the title, everyday comparison under the essential: small, sober, no colour. */
+.point .pt-obj { margin: -.35rem 0 .45rem; font-size: .92rem; line-height: 1.4; color: var(--soft); }
+.point .pt-obj span, .point .pt-ana span { font-size: var(--fs-5); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-style: normal; margin-right: .2em; }
+.point .pt-ana { margin: -.6rem 0 1.2rem; font-size: 1rem; line-height: 1.45; font-style: italic; color: var(--soft); }
+
+/* "Concerne aussi": readable chips (colour square + segment name), linked to that filter. */
+.also { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .45rem; margin: 0 0 0; max-width: none; padding-top: .2rem; font-size: var(--fs-5); line-height: 1.2; }
+.also-h { color: var(--soft); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-right: .3rem; }
+.also-c { display: inline-flex; align-items: center; gap: .45em; padding: .28rem .55rem .3rem .45rem; border: 1px solid var(--rule); color: var(--ink); text-decoration: none; font-weight: 500; }
+.also-c i { width: .7rem; height: .7rem; flex: none; background: var(--c); box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 30%, transparent); }
+.also-c:hover { border-color: var(--ink); }
+
+/* ===== #10 Sources: footnote line under a hairline ===== */
+.fn { margin-top: 1rem; padding-top: .7rem; border-top: 1px solid var(--rule); font-size: .82rem; line-height: 1.4; color: var(--soft); }
+.point > .cmp + .fn { margin-top: auto; }
+.also + .fn { margin-top: 1rem; }
+.fn-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; margin: 0; }
+.fn ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+.fn li { display: flex; align-items: baseline; gap: .55rem; min-width: 0; }
+.fn li > a, .fn li > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+.fn-n {
+  flex: none; display: inline-grid; place-items: center; min-width: 1.05rem; height: 1.05rem; padding: 0 .2rem;
+  position: relative; top: -.28em; background: var(--ink); color: var(--paper);
+  font-size: .64rem; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums;
+}
+.fn-tbc .fn-n { background: #FFF3A3; color: #16181B; }
+.fn a { color: var(--ink); text-decoration-color: var(--rule); text-decoration-thickness: 1px; }
+.fn a:hover { text-decoration-color: currentColor; }
+.fn-go { display: inline-block; margin-left: .3em; font-weight: 700; text-decoration: none; }
+
+/* ===== #8 Audience tiles: pictogram + diagonal colour cut on hover / keyboard focus ===== */
+.tile.tile { justify-content: flex-start; transition: none; isolation: isolate; }
+.tile.tile:hover, .tile.tile:focus-visible { transform: none; }
+.tile::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; background: var(--tcut, rgba(0,0,0,.3));
+  clip-path: polygon(100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%);
+  transition: clip-path .32s cubic-bezier(.16,1,.3,1);
+}
+.tile:hover::before, .tile:focus-visible::before { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 100%); }
+.tile::after { z-index: 1; }
+@media (prefers-color-scheme: dark) { .tile.tile { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--tp), #fff 16%); } }
+.tile:focus-visible::after { transform: none; opacity: 1; }
+.tile .pic { width: 44px; height: 44px; display: block; flex: none; margin-bottom: 1rem; }
+.tile .hook { margin-top: auto; padding-right: 1.6rem; }
+
+@media (max-width: 26rem) {
+  .point.point { --pt-pad: 1.1rem; }
+  .tile.tile { min-height: 0; padding: 1.1rem 1.1rem 1.25rem; }
+  .tile .pic { position: absolute; top: 1rem; right: 1rem; width: 40px; height: 40px; margin: 0; }
+  .tile .lab { padding-right: 3.4rem; }
+  .tile .hook { margin-top: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile::before { transition: none; }
+}

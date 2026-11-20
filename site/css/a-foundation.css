@@ -1,0 +1,205 @@
+/* package a-foundation — paper, section rhythm, header.
+   Loaded after style.css. Square corners, Plex, motion: short arrivals on out-expo, hard cuts on colour. */
+
+:root {
+  --ease-arrive: cubic-bezier(.16,1,.3,1);
+  --t-move: .24s;
+  /* Hairline at section seams: resolved at :root, so it is the page ink at 15% in both themes. */
+  --seam: color-mix(in srgb, var(--ink) 15%, transparent);
+  /* Paper grain: one small tile of fractal noise, alpha only, a few % strong. Scrolls with its box (no fixed repaint). */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .17 0 0 0 0 .12 0 0 0 -1.6 1.15'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.13'/%3E%3C/svg%3E");
+  --grain-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 -1.6 1.15'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)' opacity='.07'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+  :root { --grain: var(--grain-light); }
+}
+
+/* ---------- Paper ---------- */
+body { background-color: var(--paper); background-image: var(--grain); }
+
+/* ---------- Section tones (home rhythm) ----------
+   Each tone re-scopes the palette tokens, so cards, buttons, rules and soft text inside follow automatically. */
+.tone-paper   { background-color: var(--paper);   background-image: var(--grain); color: var(--ink); }
+.tone-surface { background-color: var(--surface); background-image: var(--grain); color: var(--ink); }
+.band         { background-image: var(--grain); }
+.tone-ink {
+  --paper: #16181B; --ink: #F2F1ED; --soft: #B9BCC2; --rule: #34373C; --surface: #202327;
+  background-color: var(--paper); background-image: var(--grain-light); color: var(--ink);
+}
+.tone-signal {
+  --paper: #D52B1E; --ink: #FFFFFF; --soft: rgba(255,255,255,.82); --rule: rgba(255,255,255,.3); --surface: #C02518;
+  background-color: var(--paper); color: var(--ink);
+}
+.tone-signal .btn-signal { background: #FFFFFF; border-color: #FFFFFF; color: #D52B1E; }
+@media (prefers-color-scheme: dark) {
+  /* In dark mode "ink" goes one step deeper than the page so the set-piece still reads as its own room. */
+  .tone-ink, .ink { --paper: #070809; --surface: #141619; --rule: #2A2D32; }
+}
+.tone-ink mark.tbc, .ink mark.tbc { color: #16181B; }
+.tone-ink .cmp > div:last-child b { color: var(--ink); }
+
+/* Seams: one 1px hairline where two sections meet (not against the coloured hero / numbers bands). */
+main > section + section { border-top: 1px solid var(--seam); }
+main > section.numbers, main > .numbers + section, main > .hero-x + section { border-top: 0; }
+
+/* Set-pieces: the two decisive moments get room. */
+.tall { padding-top: clamp(5rem, 10vw, 9rem); padding-bottom: clamp(5rem, 10vw, 9rem); }
+.tall .section-head { margin-bottom: clamp(2rem, 4vw, 3.2rem); }
+.tall .section-head h2 { font-size: var(--fs-1); max-width: 18ch; }
+.tall .section-head p { font-size: var(--fs-4); }
+/* Folio: a print-style running number at the top-left of each content section (decorative, hidden from AT). */
+main { counter-reset: folio; }
+.folio { counter-increment: folio; position: relative; }
+.folio::before {
+  content: counter(folio, decimal-leading-zero);
+  content: counter(folio, decimal-leading-zero) / "";
+  position: absolute; top: 1.35rem; left: max(16px, calc((100% - var(--max)) / 2 + 16px));
+  padding-right: 2.6rem;
+  font: 600 var(--fs-5)/1 var(--font-text); letter-spacing: .1em; font-variant-numeric: tabular-nums;
+  color: var(--soft);
+  background: linear-gradient(currentColor, currentColor) right center / 1.9rem 1px no-repeat;
+  pointer-events: none;
+}
+.tall.folio::before { top: clamp(1.6rem, 3vw, 2.6rem); color: var(--signal); }
+.tone-ink.folio::before { color: #FF5A4B; }
+
+/* ---------- Deadline band ---------- */
+.deadline {
+  font-size: .9rem; line-height: 1.35; letter-spacing: .01em;
+  padding: .55em 16px;
+}
+.deadline [data-days-left] {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.12em;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.deadline a { text-underline-offset: 3px; text-decoration-thickness: 1.5px; white-space: nowrap; }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border-bottom: 1px solid var(--seam);
+}
+.site-header .wrap { padding-top: .9rem; padding-bottom: .9rem; gap: .6rem 1.5rem; transition: padding var(--t-move) var(--ease-arrive); }
+.brand {
+  font-size: 1.55rem; line-height: 1; letter-spacing: -.01em; text-transform: uppercase;
+  transform-origin: left center; transition: transform var(--t-move) var(--ease-arrive);
+}
+.nav { gap: 1.5rem; }
+.nav a:not(.btn) {
+  font-size: var(--fs-5); text-transform: uppercase; letter-spacing: .09em; font-weight: 600;
+  padding: .35em 0; text-decoration: none; background: linear-gradient(currentColor, currentColor) left bottom / 0 2px no-repeat;
+  transition: background-size var(--t-move) var(--ease-arrive);
+}
+.nav a:not(.btn):hover, .nav a:not(.btn)[aria-current] { text-decoration: none; background-size: 100% 2px; }
+.nav .btn { padding: .55em .95em; gap: 0; }
+.sig-days {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.12em; letter-spacing: .02em; font-variant-numeric: tabular-nums;
+  margin-left: .7em; padding-left: .7em; border-left: 1px solid currentColor;
+  line-height: 1;
+}
+
+/* Slim bar once the page moves. Brand shrinks by transform (no reflow). */
+.site-header.is-scrolled { background: color-mix(in srgb, var(--paper) 97%, transparent); }
+.site-header.is-scrolled .wrap { padding-top: .45rem; padding-bottom: .45rem; }
+.site-header.is-scrolled .brand { transform: scale(.82); }
+
+/* Sticky stack, JS only: band on top during the first screen, header under it; past the fold the band folds away. */
+.hdr-js { scroll-padding-top: calc(var(--head-h, 4rem) + 12px); }
+.hdr-js:not(.deadline-past) .deadline { position: sticky; top: 0; z-index: 11; transition: transform var(--t-move) var(--ease-arrive), visibility 0s; }
+.hdr-js:not(.deadline-past) .site-header { top: var(--dl-h, 0px); transition: top var(--t-move) var(--ease-arrive); }
+.hdr-js.past-fold .deadline { transform: translateY(-100%); visibility: hidden; transition: transform var(--t-move) var(--ease-arrive), visibility 0s var(--t-move); }
+.hdr-js.past-fold .site-header { top: 0; }
+
+/* ---------- Phones ---------- */
+@media (max-width: 44rem) {
+  .deadline { font-size: .82rem; padding: .45em 16px; }
+  /* Row 1: brand · Signer J-n (same 2.25rem row height). Row 2: the four links, spread edge to edge. */
+  .site-header .wrap { position: relative; padding-top: .5rem; padding-bottom: .35rem; row-gap: .2rem; }
+  .brand { font-size: 1.4rem; line-height: 2.25rem; }
+  .nav { flex: 1 1 100%; justify-content: space-between; gap: .2rem .8rem; }
+  .nav .btn { position: absolute; top: .5rem; right: 16px; height: 2.25rem; padding: 0 .85em; transition: top var(--t-move) var(--ease-arrive); }
+  .site-header.is-scrolled .wrap { padding-top: .3rem; padding-bottom: .15rem; }
+  .site-header.is-scrolled .nav .btn { top: .3rem; }
+  .folio::before { top: 1rem; }
+  .tall { padding-top: 4.2rem; padding-bottom: 4.2rem; }
+}
+@media (max-width: 22rem) {
+  .nav { justify-content: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header .wrap, .brand, .nav a:not(.btn), .nav .btn,
+  .hdr-js .deadline, .hdr-js .site-header { transition: none !important; }
+}
+
+/* Phones: the five menu links stay on one row (scrolls sideways if needed) instead of wrapping to a third line. */
+@media (max-width: 44rem) {
+  .nav { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: .6rem; justify-content: space-between; max-width: 100%; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav > a:not(.btn) { flex: none; white-space: nowrap; font-size: .72rem; letter-spacing: .03em; }
+}
+
+/* Partager sits right next to « Signer », as a button, on every screen size. */
+.nav .nav-share { font-weight: 700; border: 2px solid currentColor; padding: .45em .9em; text-decoration: none; text-transform: uppercase; letter-spacing: .05em; font-size: .8rem; line-height: 1.2; background-image: none; }
+.nav .nav-share:hover, .nav .nav-share[aria-current] { background: var(--ink); color: var(--paper); text-decoration: none; }
+.nav .nav-share + .btn { margin-left: -.9rem; }
+@media (max-width: 44rem) {
+  .nav .nav-share { position: absolute; top: .5rem; right: calc(16px + var(--sg-w, 7.5rem) + 6px); height: 2.25rem; display: inline-flex; align-items: center; padding: 0 .7em; font-size: .72rem; letter-spacing: .04em; transition: top var(--t-move) var(--ease-arrive); }
+  .site-header.is-scrolled .nav .nav-share { top: .3rem; }
+  .nav .nav-share + .btn { margin-left: 0; }
+}
+/* « Faites signer autour de vous » band, right after the hero */
+.share-band { padding: clamp(2rem, 4vw, 3.2rem) 0; }
+.share-head { display: flex; justify-content: space-between; align-items: end; gap: .6rem 2rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.share-head h2 { margin: 0; font-size: var(--fs-2); }
+.share-head p { margin: 0; color: var(--soft); max-width: 34rem; }
+.share-picks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+.share-pick { position: relative; display: block; padding: 1.3rem 3rem 1.3rem 1.3rem; background: var(--paper); border-top: 3px solid var(--ink); text-decoration: none; color: var(--ink); }
+.share-pick b { display: block; font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700; font-size: var(--fs-3); line-height: 1.1; margin-bottom: .35rem; }
+.share-pick span { display: block; color: var(--soft); font-size: .95rem; line-height: 1.4; }
+.share-pick i { position: absolute; right: 1.1rem; top: 1.2rem; font-style: normal; font-weight: 700; font-size: 1.4rem; transition: transform .2s cubic-bezier(.16,1,.3,1); }
+.share-pick:hover { background: var(--ink); color: var(--paper); }
+.share-pick:hover span { color: color-mix(in srgb, var(--paper) 80%, transparent); }
+.share-pick:hover i { transform: translateX(4px); }
+@media (max-width: 52rem) { .share-picks { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .share-pick i { transition: none; } }
+
+/* « Étape suivante » inside « Comment signer » (ink section: tokens are inverted there) */
+.sg-next { position: relative; display: block; margin-top: 1.6rem; padding: 1.1rem 3rem 1.1rem 1.2rem; border: 2px solid var(--ink); color: var(--ink); text-decoration: none; }
+.sg-next b { display: block; font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700; font-size: var(--fs-3); line-height: 1.1; }
+.sg-next span { display: block; margin-top: .3rem; color: var(--soft); font-size: .95rem; }
+.sg-next i { position: absolute; right: 1.1rem; top: 50%; transform: translateY(-50%); font-style: normal; font-weight: 700; font-size: 1.5rem; }
+.sg-next:hover { background: var(--ink); color: var(--paper); }
+.sg-next:hover span { color: inherit; opacity: .85; }
+
+/* « Partager » : yellow, with a hand-drawn pencil circle around it (header button and hero button) */
+:root { --share-yellow: #FFD84A; --pencil: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20220%2090%22%20preserveAspectRatio%3D%22none%22%3E%3Cpath%20d%3D%22M24%2052%20C12%2026%2076%207%20122%208%20C176%209%20212%2026%20206%2050%20C199%2074%20132%2084%2088%2082%20C40%2080%206%2068%2014%2044%20C20%2028%2048%2016%2084%2012%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%223.2%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3Cpath%20d%3D%22M30%2058%20C20%2034%2082%2014%20126%2015%20C170%2017%20200%2031%20196%2050%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%20opacity%3D%22.55%22/%3E%3C/svg%3E"); }
+.nav .nav-share, .hero-x .btn-share { position: relative; background: var(--share-yellow); color: #16181B; border-color: var(--share-yellow); }
+.nav .nav-share:hover, .nav .nav-share[aria-current], .hero-x .btn-share:hover { background: #FFE780; color: #16181B; border-color: #FFE780; }
+.nav .nav-share::after, .hero-x .btn-share::after {
+  content: ""; position: absolute; inset: -11px -16px -10px -14px; pointer-events: none;
+  background: var(--ink); -webkit-mask: var(--pencil) center / 100% 100% no-repeat; mask: var(--pencil) center / 100% 100% no-repeat;
+  transform: rotate(-2deg);
+}
+.hero-x .btn-share::after { background: var(--hon, #fff); }
+@media (max-width: 44rem) { .nav .nav-share::after { inset: -7px -9px -6px -9px; } }
+@media print { .nav .nav-share::after, .hero-x .btn-share::after { display: none; } }
+@media (max-width: 44rem) { .nav .nav-share { position: absolute; } }
+.nav a.nav-share { background: var(--share-yellow); color: #16181B; }
+.nav a.nav-share:hover, .nav a.nav-share[aria-current] { background: #FFE780; color: #16181B; }
+
+/* Coherence: sharing = yellow everywhere. Pencil circle = graphite on light grounds, yellow on dark grounds. */
+.hero-x .btn-share::after { background: var(--share-yellow); }
+.hero-x .btn-share { border-color: var(--share-yellow); }
+.btn-share-fill { background: var(--share-yellow); border-color: var(--share-yellow); color: #16181B; }
+.btn-share-fill:hover { background: #FFE780; border-color: #FFE780; color: #16181B; }
+.share-pick { border-top-color: var(--share-yellow); border-top-width: 4px; }
+.share-pick i { color: #B88A00; }
+.share-pick:hover { background: var(--share-yellow); color: #16181B; }
+.share-pick:hover span { color: #16181B; opacity: .8; }
+.share-pick:hover i { color: #16181B; }
+.sg-next { border-color: var(--share-yellow); }
+.sg-next i { color: var(--share-yellow); }
+.sg-next:hover { background: var(--share-yellow); color: #16181B; }
+.sg-next:hover i { color: #16181B; }
+@media (prefers-color-scheme: dark) { .share-pick i { color: var(--share-yellow); } }

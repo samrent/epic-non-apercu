@@ -1,0 +1,173 @@
+/* package d-flow-sign — #flux (data-flow line diagram) and #signer (signature sheet + steps) */
+
+/* ---------- Local tokens (light / dark) ---------- */
+:root {
+  --fl-no: #D52B1E;          /* signal red: the path that leaves */
+  --fl-go: #0E6B66;          /* sarcelle: the path that stays */
+  --fl-ink: var(--ink);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --fl-no: #F0564A; --fl-go: #3FB3A9; }
+}
+:root[data-theme="dark"] { --fl-no: #F0564A; --fl-go: #3FB3A9; }
+
+/* ================= #flux : one line, two fates ================= */
+.fl { margin: 0; padding: 0; position: relative; }
+.fl-svg { display: block; width: 100%; height: auto; overflow: visible; color: var(--fl-ink); }
+.fl-m { display: none; }
+
+.fl-ln { fill: none; stroke: currentColor; stroke-width: 7; stroke-linejoin: miter; stroke-linecap: butt; }
+.fl-ln-go { stroke: var(--fl-go); }
+.fl-ln-no { stroke: var(--fl-no); stroke-dasharray: 14 9; }
+.fl-fill-no { fill: var(--signal); }
+.fl-ln-no + .fl-fill-no { fill: var(--fl-no); }
+.fl-fill-go { fill: var(--fl-go); }
+.fl-border { stroke: var(--soft); stroke-width: 2.5; stroke-dasharray: 2 9; stroke-linecap: square; }
+
+.fl-st { fill: var(--paper); stroke: currentColor; stroke-width: 5; }
+.fl-st-on { fill: currentColor; }
+.fl-st-go { stroke: var(--fl-go); }
+.fl-st-no { stroke: var(--fl-no); }
+
+.fl-svg text { fill: currentColor; }
+.fl-svg .fl-name { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -.005em; }
+.fl-svg .fl-name-xl { font-size: 32px; }
+.fl-svg .fl-sub { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; font-size: 17px; fill: var(--soft); }
+.fl-svg .fl-tag { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; font-weight: 600; font-size: 14px; letter-spacing: .1em; text-transform: uppercase; fill: var(--soft); }
+.fl-svg .fl-tx-no { fill: var(--fl-no); }
+.fl-svg .fl-tx-go { fill: var(--fl-go); }
+.fl-svg .fl-tx-inv { fill: #FFFFFF; }
+
+.fl-m .fl-name { font-size: 20px; }
+.fl-m .fl-sub { font-size: 14px; }
+.fl-m .fl-tag { font-size: 11px; letter-spacing: .09em; }
+.fl-m .fl-ln { stroke-width: 6; }
+.fl-m .fl-st { stroke-width: 4; }
+
+.fl-sr, .fl figcaption.sr ol { margin: 0; }
+
+@media (max-width: 60rem) {
+  .fl-d { display: none; }
+  .fl-m { display: block; max-width: 26rem; }
+}
+
+/* Draw-on: only armed by the inline script (JS on, motion allowed). Lines draw ~200-300 ms,
+   then the red/green outcomes arrive on a hard cut. Total ≤ 560 ms. */
+.fl-armed .fl-draw { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.fl-armed .fl-late { opacity: 0; }
+.fl-armed.fl-on .fl-draw { stroke-dashoffset: 0; transition: stroke-dashoffset var(--t, 240ms) cubic-bezier(.16,1,.3,1) var(--d, 0ms); }
+.fl-armed.fl-on .fl-late { opacity: 1; transition: opacity 0s linear 520ms; }
+@media (prefers-reduced-motion: reduce) {
+  .fl-armed .fl-draw { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .fl-armed .fl-late { opacity: 1; }
+}
+@media print {
+  .fl-armed .fl-draw { stroke-dasharray: none; stroke-dashoffset: 0; }
+  .fl-armed .fl-late { opacity: 1; }
+}
+
+/* ================= #signer : the action ================= */
+.sg { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 5.5rem); align-items: start; margin-top: .6rem; }
+.sg > * { min-width: 0; }
+
+/* --- Miniature of the real signature sheet (a paper object: fixed paper colours in both themes) --- */
+.sg-sheet-wrap { position: relative; padding: 1.2rem 1.4rem 1.6rem .4rem; }
+.sg-sheet-wrap::before { /* the sheet underneath, offset straight */
+  content: ''; position: absolute; inset: 1.8rem .4rem .6rem 1.8rem;
+  background: var(--surface); border: 1.5px solid var(--rule);
+}
+.sg-sheet {
+  --sh-paper: #FFFFFF; --sh-ink: #16181B; --sh-rule: #9C9890; --sh-soft: #6B6F76;
+  position: relative; font-size: 11px; line-height: 1.25; color: var(--sh-ink); background: var(--sh-paper);
+  padding: 2.2em 2.2em 2em; border-radius: 0;
+  border: 1px solid color-mix(in srgb, var(--sh-ink) 14%, transparent);
+  box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+  display: flex; flex-direction: column; gap: 1.1em;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+.sg-title {
+  font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700;
+  font-size: 2em; line-height: 1.02; letter-spacing: -.005em; margin-right: 4.4em; max-width: 9.5em;
+  border-top: .35em solid var(--signal); padding-top: .45em;
+}
+.sg-stamp {
+  position: absolute; top: 2.2em; right: 2.2em; width: 7.2em; padding: .55em .5em .5em;
+  border: .2em solid var(--sh-ink); text-align: center; text-transform: uppercase; letter-spacing: .08em;
+}
+.sg-stamp b { display: block; font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-size: 1.25em; line-height: 1; letter-spacing: .02em; }
+.sg-stamp span { display: block; font-size: .78em; margin-top: .35em; border-top: 1px solid var(--sh-ink); padding-top: .3em; color: var(--sh-ink); }
+.sg-fine { display: grid; gap: .45em; }
+.sg-fine i { display: block; height: .32em; background: color-mix(in srgb, var(--sh-ink) 16%, transparent); }
+.sg-fine i:nth-child(2) { width: 92%; }
+.sg-fine i:nth-child(3) { width: 97%; }
+.sg-fine i:nth-child(4) { width: 58%; }
+.sg-fine-end { margin-top: .9em; }
+.sg-fine-end i:nth-child(2) { width: 40%; }
+.sg-commune { font-weight: 600; display: flex; align-items: baseline; gap: .5em; font-size: 1.15em; }
+.sg-commune span { flex: 1; border-bottom: 1.5px solid var(--sh-ink); height: 1em; }
+.sg-table {
+  display: grid; grid-template-columns: 1fr 1fr .95fr 1.5fr 1.25fr;
+  border-top: 2px solid var(--sh-ink); border-left: 1px solid var(--sh-rule);
+}
+.sg-table > div { border-right: 1px solid var(--sh-rule); border-bottom: 1px solid var(--sh-rule); height: 3.1em; }
+.sg-table > .sg-th {
+  height: auto; min-height: 3.1em; padding: .4em .45em; font-size: .78em; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .04em; line-height: 1.15; background: color-mix(in srgb, var(--sh-ink) 6%, var(--sh-paper));
+  border-bottom: 1.5px solid var(--sh-ink); display: flex; align-items: flex-end;
+}
+.sg-sig { position: relative; }
+.sg-sig svg { position: absolute; inset: .3em .2em; width: calc(100% - .4em); height: calc(100% - .6em); overflow: visible; }
+.sg-sig path { fill: none; stroke: #1D3A8A; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* --- Steps: numbered, poster-scale numerals --- */
+.sg-steps { list-style: none; counter-reset: sg; margin: 0; padding: 0; border-bottom: 1.5px solid var(--rule); }
+.sg-steps li {
+  counter-increment: sg; display: grid; grid-template-columns: calc(var(--fs-2) * 1.15) minmax(0, 1fr); column-gap: 1.1rem; align-items: baseline;
+  padding: .95rem 0 1rem; border-top: 1.5px solid var(--rule);
+}
+.sg-steps li:first-child { border-top: 3px solid var(--ink); }
+.sg-steps li::before {
+  content: counter(sg, decimal-leading-zero); grid-row: 1 / span 2; align-self: start;
+  font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700;
+  font-size: var(--fs-2); line-height: .82; letter-spacing: -.02em; color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+.sg-steps b {
+  display: block; font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700;
+  font-size: var(--fs-3); line-height: 1.05; letter-spacing: 0; margin: 0 0 .25rem;
+}
+.sg-steps span { display: block; color: var(--soft); font-size: 1rem; line-height: 1.45; }
+
+/* --- One dominant action --- */
+.btn.sg-cta {
+  display: flex; width: 100%; justify-content: space-between; align-items: center; gap: 1rem;
+  margin-top: 1.8rem; padding: 1.15rem 1.4rem; font-size: var(--fs-4); letter-spacing: .06em; min-height: 4.4rem;
+  border-width: 3px;
+}
+.sg-cta svg { width: 1.7rem; height: 1.7rem; flex: none; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: square; }
+.sg-alt { display: flex; flex-wrap: wrap; gap: .4rem 1.6rem; margin: 1rem 0 0; max-width: none; font-size: .97rem; color: var(--soft); }
+.sg-alt a { color: var(--ink); font-weight: 600; text-decoration-thickness: 1.5px; }
+.sg-alt > a { color: var(--ink); }
+.sg-alt a:hover { text-decoration-thickness: 3px; }
+
+@media (max-width: 64rem) {
+  .sg { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: 2.4rem; }
+  .sg-sheet { font-size: 9px; }
+}
+@media (max-width: 44rem) {
+  .sg { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; }
+  .sg-sheet-wrap { max-width: 17rem; margin: 0 auto; padding: .8rem 1.2rem 1.2rem .6rem; }
+  .sg-sheet { font-size: 7px; box-shadow: 8px 8px 0 color-mix(in srgb, var(--ink) 12%, transparent); }
+  .sg-steps li { grid-template-columns: calc(var(--fs-2) * 1.15) minmax(0, 1fr); column-gap: .8rem; padding: .8rem 0 .85rem; }
+  .sg-steps span { font-size: .95rem; }
+  .btn.sg-cta { margin-top: 1.4rem; }
+}
+
+/* Desktop: the sheet stays in view while the steps are read. */
+@media (min-width: 44.01rem) { .sg-sheet-wrap { position: sticky; top: 6rem; } }
+
+/* The real signature sheet (image of the official PDF), straight, linked to the download */
+.sg-real { display: block; text-decoration: none; color: inherit; }
+.sg-real img { position: relative; display: block; width: 100%; height: auto; background: #fff; border: 1px solid color-mix(in srgb, #16181B 14%, transparent); box-shadow: 14px 14px 0 color-mix(in srgb, var(--ink) 12%, transparent); }
+.sg-real-cap { position: relative; display: block; margin-top: 1.1rem; font-size: .9rem; color: var(--soft); }
+.sg-real:hover .sg-real-cap { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }

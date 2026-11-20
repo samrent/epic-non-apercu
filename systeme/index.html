@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio EPIC-NON</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  :root {
+    --paper: #F6F4EF; --ink: #16181B; --soft: #4B5058; --rule: #D8D4CB; --surface: #ECE9E2; --signal: #D52B1E;
+    --p: #1F3F66; --t: #E6EDF5; --on: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.5 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; color: var(--ink); background: var(--paper); }
+  a { color: inherit; }
+  button, .btn { font: inherit; }
+  .wrap { max-width: 82rem; margin: 0 auto; padding: 0 16px; }
+
+  header.top { border-bottom: 1px solid var(--rule); background: var(--paper); position: sticky; top: 0; z-index: 10; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; flex-wrap: wrap; }
+  .brand { font-weight: 700; letter-spacing: -.01em; font-size: 1.15rem; }
+  .brand span { color: var(--signal); }
+  .brand small { font-weight: 400; color: var(--soft); font-size: .9rem; margin-left: 8px; }
+  .global { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: .9rem; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 0; border: 1.5px solid var(--ink); background: transparent; color: var(--ink); text-decoration: none; font-weight: 600; font-size: .88rem; cursor: pointer; white-space: nowrap; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { opacity: .85; }
+  .btn[aria-disabled="true"], .btn:disabled { opacity: .4; pointer-events: none; }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* Segment rail */
+  .rail { display: flex; gap: 8px; flex-wrap: wrap; padding: 20px 0 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px; border-radius: 0; border: 1.5px solid var(--rule); background: #fff; cursor: pointer; font: inherit; font-size: .92rem; color: var(--ink); }
+  .chip i { width: 14px; height: 14px; border-radius: 0; display: inline-block; }
+  .chip[aria-pressed="true"] { border-color: var(--c); background: var(--c); color: var(--on-c); font-weight: 600; }
+
+  /* Segment hero */
+  .hero { margin: 12px 0 28px; border-radius: 0; background: var(--p); color: var(--on); padding: 28px 28px 24px; display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; transition: background .25s; }
+  .hero .k { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 600; opacity: .85; }
+  .hero h1 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.1; letter-spacing: -.02em; margin: 6px 0 10px; font-weight: 700; }
+  .hero p { margin: 0; max-width: 46rem; opacity: .92; }
+  .hero .why { font-size: .88rem; opacity: .8; margin-top: 10px; }
+  .hero .stats { text-align: right; font-size: .9rem; opacity: .9; white-space: nowrap; }
+  .hero .stats b { display: block; font-size: 1.6rem; font-weight: 700; }
+
+  /* Preview cards */
+  .previews { display: grid; grid-template-columns: 1fr 1fr .62fr; gap: 20px; align-items: start; }
+  .card { background: #fff; border: 1px solid var(--rule); border-radius: 0; overflow: hidden; }
+  .card .stagebox { background: var(--surface); padding: 18px; display: flex; justify-content: center; }
+  .frame { position: relative; width: 100%; overflow: hidden; box-shadow: 0 6px 22px rgba(0,0,0,.18); background: #fff; }
+  .frame iframe { position: absolute; top: 0; left: 0; border: 0; transform-origin: 0 0; }
+  .story .frame { border-radius: 0; max-width: 300px; }
+  .card .meta { padding: 14px 16px 16px; }
+  .card h2 { font-size: 1rem; margin: 0 0 2px; }
+  .card .spec { color: var(--soft); font-size: .85rem; margin: 0 0 12px; }
+  .card .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .progress { height: 4px; background: var(--rule); border-radius: 0; overflow: hidden; margin-top: 10px; display: none; }
+  .progress > div { height: 100%; width: 0; background: var(--p); }
+
+  /* Print downloads for the selected public */
+  .printdl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border: 1px solid var(--rule); background: #fff; margin: 0 0 20px; }
+  .printdl > div { padding: 14px 16px; border-left: 1px solid var(--rule); display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .printdl > div:first-child { border-left: 0; }
+  .printdl .btn { white-space: normal; text-align: left; }
+  .printdl p { margin: 0; font-size: .85rem; color: var(--soft); }
+  .printdl .quietlink { font-size: .88rem; font-weight: 600; color: var(--soft); }
+  .printdl .quietlink:hover { color: var(--ink); }
+  @media (max-width: 52rem) { .printdl { grid-template-columns: 1fr; } .printdl > div { border-left: 0; border-top: 1px solid var(--rule); } .printdl > div:first-child { border-top: 0; } }
+
+  /* Points */
+  h3.sec { font-size: 1.15rem; margin: 40px 0 4px; }
+  .sub { color: var(--soft); margin: 0 0 16px; font-size: .95rem; }
+  .points { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 14px; }
+  .pt { background: #fff; border: 1px solid var(--rule); border-radius: 0; padding: 16px; border-top: 4px solid var(--p); }
+  .pt .n { font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--soft); }
+  .pt h4 { margin: 4px 0 6px; font-size: 1.05rem; line-height: 1.25; }
+  .pt p { margin: 0 0 10px; font-size: .93rem; }
+  .cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-size: .85rem; }
+  .cmp div { background: var(--surface); border-radius: 0; padding: 8px; }
+  .cmp div:last-child { background: var(--t); }
+  .cmp b { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: var(--soft); }
+  .cmp div:last-child b { color: var(--p); }
+  .src { font-size: .78rem; color: var(--soft); margin-top: 8px; }
+  .tbc { background: #fff3a3; padding: 1px 4px; border-radius: 0; color: var(--ink); }
+
+  .brand, .hero h1, .hero .stats b, .pt h4, .card h2 { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; letter-spacing: -.01em; }
+  .btn { text-transform: uppercase; letter-spacing: .05em; font-size: .8rem; }
+  footer { margin: 48px 0 32px; padding-top: 16px; border-top: 1px solid var(--rule); color: var(--soft); font-size: .88rem; }
+  .note { font-size: .85rem; color: var(--soft); }
+
+  @media (max-width: 64rem) {
+    .previews { grid-template-columns: 1fr 1fr; }
+    .story { grid-column: 1 / -1; }
+  }
+  @media (max-width: 40rem) {
+    .previews { grid-template-columns: 1fr; }
+    .hero { grid-template-columns: 1fr; padding: 22px 18px; }
+    .hero .stats { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<style>@media print{.preview-banner{display:none!important}}.bare .preview-banner,.embed .preview-banner{display:none!important}</style><div class="preview-banner" style="position:sticky;top:0;z-index:99;background:#fff3a3;color:#16181B;font:600 14px/1.4 system-ui,sans-serif;padding:6px 16px;text-align:center">Aperçu de travail, à ne pas diffuser · <a href="../index.html" style="color:inherit">retour à l'aperçu</a></div>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">EPIC<span>-NON</span> <small>Studio des flyers</small></div>
+    <div class="global">
+      <a class="btn" id="dl-all-pdf" download>PDF A5 · tous les publics</a>
+      <a class="btn" id="dl-all-a4" download>PDF A4, 2 par feuille · tous</a>
+      <a class="btn" id="dl-all-couleur" download>PDF couleur imprimeur · tous</a>
+      <a class="btn solid" id="dl-all-kit" download>Kit complet (zip)</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="rail" id="rail" aria-label="Choisir un public"></nav>
+
+  <section class="hero" id="hero" aria-live="polite">
+    <div>
+      <div class="k" id="h-aud"></div>
+      <h1 id="h-hook"></h1>
+      <p id="h-ess"></p>
+      <p class="why" id="h-why"></p>
+    </div>
+    <div class="stats"><b id="h-n"></b>points pour ce public</div>
+  </section>
+
+  <section class="printdl" aria-label="Imprimer ce flyer">
+    <div>
+      <a class="btn solid" id="dl-pdf" download>Flyer A5 à imprimer chez soi (PDF)</a>
+      <p>Recto/verso, A5. Papier blanc, texte noir, presque pas d'encre : n'importe quelle imprimante. Imprimer à 100 % (taille réelle).</p>
+    </div>
+    <div>
+      <a class="btn" id="dl-a4" download>2 flyers par feuille A4, à couper (PDF)</a>
+      <p>Papier A4 ordinaire, recto-verso retourné sur le bord court, puis couper au milieu.</p>
+    </div>
+    <div>
+      <a class="quietlink" id="dl-couleur" download>Version couleur pour imprimeur (PDF)</a>
+      <p>A5 avec 3 mm de fond perdu, aplats de couleur : pour une imprimerie, pas pour une imprimante de bureau.</p>
+    </div>
+  </section>
+
+  <section class="previews">
+    <article class="card">
+      <div class="stagebox"><div class="frame" id="f-recto"><iframe title="Recto" id="i-recto" width="560" height="794" loading="lazy"></iframe></div></div>
+      <div class="meta">
+        <h2>Recto</h2>
+        <p class="spec">A5 · 148 × 210 mm · sans fond perdu, peu d'encre</p>
+        <div class="actions"><a class="btn" id="dl-recto" download>PNG recto</a></div>
+      </div>
+    </article>
+    <article class="card">
+      <div class="stagebox"><div class="frame" id="f-verso"><iframe title="Verso" id="i-verso" width="560" height="794" loading="lazy"></iframe></div></div>
+      <div class="meta">
+        <h2>Verso</h2>
+        <p class="spec">3 points, comment signer, QR vers le site</p>
+        <div class="actions"><a class="btn" id="dl-verso" download>PNG verso</a><a class="btn" id="dl-kit" download>Kit du public (zip)</a></div>
+      </div>
+    </article>
+    <article class="card story">
+      <div class="stagebox"><div class="frame" id="f-story"><iframe title="Story animée" id="i-story"></iframe></div></div>
+      <div class="meta">
+        <h2>Story animée</h2>
+        <p class="spec" id="story-spec">1080 × 1920 · 24 i/s</p>
+        <div class="actions">
+          <button class="btn" id="st-play">Pause</button>
+          <button class="btn" id="dl-video">Vidéo WebM</button>
+        </div>
+        <div class="progress" id="st-prog"><div></div></div>
+        <p class="note" id="st-note" hidden>Enregistrement en temps réel : gardez cet onglet ouvert.</p>
+      </div>
+    </article>
+  </section>
+
+  <h3 class="sec">Les points de ce public</h3>
+  <p class="sub">Dans l'ordre utilisé par les flyers : le premier est au recto, les suivants au verso et dans la story.</p>
+  <div class="points" id="points"></div>
+
+  <footer>
+    <span id="built"></span> Pour modifier un texte : <code>data/points.json</code>, puis relancer <code>build.sh</code> pour régénérer les PDF et PNG.
+    · <a href="flyer/print.html?all=1">Planche d'impression</a> (<a href="flyer/print.html?all=1&amp;format=a4">A4, 2 par feuille</a> · <a href="flyer/print.html?all=1&amp;style=couleur">couleur imprimeur</a>) · <a href="flyer/motion.html">Lecteur de story</a>
+  </footer>
+</main>
+
+<script type="module">
+import { loadSystem } from './lib/data.js?v=7';
+const sys = await loadSystem('./data/');
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+let manifest = null;
+try { manifest = await fetch('out/manifest.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null); } catch {}
+
+// A file missing from the manifest (e.g. zip kits, left out of the online preview) hides its button.
+const setLink = (el, href) => {
+  if (href) { el.href = href; el.hidden = false; el.removeAttribute('aria-disabled'); }
+  else { el.removeAttribute('href'); el.hidden = true; }
+};
+setLink($('#dl-all-pdf'), manifest?.all?.pdf);
+setLink($('#dl-all-a4'), manifest?.all?.a4);
+setLink($('#dl-all-couleur'), manifest?.all?.couleur);
+setLink($('#dl-all-kit'), manifest?.all?.kit);
+$('#built').textContent = manifest ? `Fichiers générés le ${new Date(manifest.built).toLocaleString('fr-CH', { dateStyle: 'long', timeStyle: 'short' })}.` : 'Fichiers téléchargeables pas encore générés.';
+
+// Rail
+const rail = $('#rail');
+sys.segmentIds.forEach(id => {
+  const c = sys.tokens.segments[id];
+  const b = document.createElement('button');
+  b.className = 'chip'; b.dataset.seg = id;
+  b.style.setProperty('--c', c.primary); b.style.setProperty('--on-c', c.onPrimary);
+  b.innerHTML = `<i style="background:${c.primary}"></i>${esc(c.label)}`;
+  b.onclick = () => select(id);
+  rail.appendChild(b);
+});
+
+// Fit fixed-size iframes into their frames.
+function fit(frameEl, iframe, w, h) {
+  const s = frameEl.clientWidth / w;
+  frameEl.style.height = (h * s) + 'px';
+  iframe.style.width = w + 'px'; iframe.style.height = h + 'px';
+  iframe.style.transform = `scale(${s})`;
+}
+const SHEET = [560, 794];  // ink-light A5, 148 x 210 mm at 96 px/in
+function layout() {
+  fit($('#f-recto'), $('#i-recto'), ...SHEET);
+  fit($('#f-verso'), $('#i-verso'), ...SHEET);
+  const fs = $('#f-story'), w = fs.clientWidth;
+  fs.style.height = (w * 16 / 9) + 'px';
+  $('#i-story').style.width = w + 'px'; $('#i-story').style.height = (w * 16 / 9) + 'px'; $('#i-story').style.transform = 'none';
+}
+addEventListener('resize', layout);
+
+let current = null, playing = true;
+const storyWin = () => $('#i-story').contentWindow;
+$('#i-story').src = `flyer/motion.html?embed=1&segment=${new URLSearchParams(location.search).get('segment') || 'secret'}`;
+
+function select(seg) {
+  current = seg;
+  const s = sys.resolve(seg), c = s.color;
+  const root = document.documentElement.style;
+  root.setProperty('--p', c.primary); root.setProperty('--t', c.tint); root.setProperty('--on', c.onPrimary);
+  document.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.seg === seg)));
+  $('#h-aud').textContent = `${c.label} · ${c.audience}`;
+  $('#h-hook').textContent = s.hook;
+  $('#h-ess').textContent = s.hero.essential;
+  $('#h-why').textContent = 'Couleur : ' + c.why;
+  $('#h-n').textContent = s.points.length;
+  $('#i-recto').src = `flyer/print.html?segment=${seg}&sheet=recto&bare=1`;
+  $('#i-verso').src = `flyer/print.html?segment=${seg}&sheet=verso&bare=1`;
+  const m = manifest?.segments?.[seg];
+  setLink($('#dl-recto'), m?.recto); setLink($('#dl-verso'), m?.verso);
+  setLink($('#dl-pdf'), m?.pdf); setLink($('#dl-a4'), m?.a4); setLink($('#dl-couleur'), m?.couleur);
+  setLink($('#dl-kit'), m?.kit);
+  try { storyWin().studio?.setSegment(seg); playing = true; $('#st-play').textContent = 'Pause'; } catch {}
+  $('#points').innerHTML = s.points.map((p, i) => `
+    <article class="pt">
+      <div class="n">${i === 0 ? 'Recto · point principal' : 'Verso · point ' + i}</div>
+      <h4>${esc(p.title)}</h4>
+      <p>${esc(p.essential)}</p>
+      <div class="cmp"><div><b>${esc(p.compare.left.label)}</b>${esc(p.compare.left.text)}</div><div><b>${esc(p.compare.right.label)}</b>${esc(p.compare.right.text)}</div></div>
+      <div class="src">Source : ${p.source.url ? `<a href="${esc(p.source.url)}">${esc(p.source.text)}</a>` : esc(p.source.text)}${p.source.tbc ? ` · <span class="tbc">à confirmer : ${esc(p.source.tbc)}</span>` : ''}</div>
+    </article>`).join('');
+  const u = new URL(location); u.searchParams.set('segment', seg); history.replaceState(null, '', u);
+  layout();
+}
+
+$('#i-story').addEventListener('load', () => {
+  const w = storyWin();
+  const ready = () => w.studio ? (w.studio.setSegment(current), updateSpec()) : setTimeout(ready, 100);
+  ready();
+});
+function updateSpec() {
+  const f = storyWin().studio?.film; if (f) $('#story-spec').textContent = `1080 × 1920 · 24 i/s · ${(f.total / 24).toFixed(0)} s`;
+}
+$('#st-play').onclick = () => { playing = !playing; storyWin().studio?.play(playing); $('#st-play').textContent = playing ? 'Pause' : 'Lecture'; };
+$('#dl-video').onclick = async () => {
+  const w = storyWin(); if (!w.studio) return;
+  const btn = $('#dl-video'), bar = $('#st-prog'), seg = current;
+  btn.disabled = true; bar.style.display = 'block'; $('#st-note').hidden = false;
+  const blob = await w.studio.exportWebM(p => { bar.firstElementChild.style.width = (p * 100) + '%'; btn.textContent = `Enregistrement ${Math.round(p * 100)} %`; });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `epic-non-${seg}-story-1080x1920.webm`; a.click();
+  btn.disabled = false; btn.textContent = 'Vidéo WebM'; bar.style.display = 'none'; $('#st-note').hidden = true;
+  w.studio.play(true); playing = true; $('#st-play').textContent = 'Pause';
+};
+
+const start = new URLSearchParams(location.search).get('segment');
+select(sys.segmentIds.includes(start) ? start : 'secret');
+window.__ready = true;
+</script>
+</body>
+</html>

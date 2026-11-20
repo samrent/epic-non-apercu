@@ -1,0 +1,254 @@
+{
+ "$doc": "Copied by tools/publish-to-site.py from epic-non-system/carrousels/carrousels.json (carousels marked tbc left out). Paths are relative to this folder.",
+ "format": [
+  1080,
+  1350
+ ],
+ "zipAll": "epic-non-tous-les-carrousels.zip",
+ "carrousels": [
+  {
+   "id": "01",
+   "slug": "contrat",
+   "title": "Un contrat ne suffit pas",
+   "subtitle": "Un contrat ne protège pas du CLOUD Act",
+   "pageLabel": "Carrousel 01",
+   "status": "corrige",
+   "segments": [
+    "suisse",
+    "secret",
+    "technique",
+    "argent"
+   ],
+   "images": [
+    "01/1.png",
+    "01/2.png",
+    "01/3.png",
+    "01/4.png"
+   ],
+   "zip": "epic-non-contrat.zip",
+   "caption": "Pour nos données de santé, un contrat ne protège pas contre une loi étrangère.\n\nLe 22 septembre, le Grand Conseil vaudois a validé le choix du logiciel américain Epic pour le dossier patient du CHUV et de onze établissements de la FHV. Un projet de 207,6 millions de francs, dont 113 millions de crédits de l'État visés par le référendum. Le Conseil d'État promet une « interdiction d'accès aux données » inscrite au contrat.\n\nLe problème n'est pas la bonne foi d'Epic. C'est qu'une entreprise américaine ne peut pas tenir certaines promesses face à son propre droit : le CLOUD Act permet à la justice américaine d'obliger Epic à livrer les données qu'elle contrôle, où qu'elles soient hébergées, Lausanne comprise. Et un tribunal peut même lui interdire de prévenir l'hôpital ou les patient·e·s. Un contrat ne protège pas d'une injonction d'un tribunal américain.\n\nUn bon contrat ne demande pas l'impossible. Pour nos données de santé, la seule garantie solide est de ne pas les confier à une entreprise soumise à un droit étranger incompatible avec le nôtre.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "02",
+   "slug": "adore",
+   "title": "Testé et apprécié",
+   "subtitle": "Une évaluation métier mesure l'usage, pas la protection des données",
+   "pageLabel": "Carrousel 02",
+   "status": "corrige",
+   "segments": [
+    "soignant",
+    "secret",
+    "technique"
+   ],
+   "images": [
+    "02/1.png",
+    "02/2.png",
+    "02/3.png",
+    "02/4.png"
+   ],
+   "zip": "epic-non-adore.zip",
+   "caption": "Un logiciel agréable à utiliser ne garantit pas, à lui seul, le secret médical.\n\n« Tous les tests métiers […] favorables à Epic » : l'argument a été entendu au Grand Conseil le 25 août 2026. Plus de 150 expert·e·s métiers des douze établissements ont évalué les offres, et plus de 300 collaborateur·trice·s ont découvert les solutions par des cas d'usage en vidéo (EMPD, ch. 6.3). C'est compréhensible : le logiciel actuel est à bout de souffle, les soignant·e·s le critiquent depuis des années, et ils et elles ont besoin d'outils modernes. Personne ne le conteste.\n\nMais une évaluation métier mesure l'usage, pas la protection des données. Elle ne dit pas qui contrôle les données, qui peut y accéder, ni si le secret médical reste garanti. Or pour des soins de qualité, l'outil le plus important n'est ni un logiciel, ni un algorithme. C'est la confiance.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "03-1",
+   "slug": "dentiste",
+   "title": "Le dentiste épicier",
+   "subtitle": "Pourquoi les alternatives ont été écartées",
+   "pageLabel": "Carrousel 03",
+   "status": "corrige",
+   "segments": [
+    "argent",
+    "region",
+    "technique",
+    "suisse",
+    "soignant"
+   ],
+   "images": [
+    "03-1/1.png",
+    "03-1/2.png",
+    "03-1/3.png",
+    "03-1/4.png"
+   ],
+   "zip": "epic-non-dentiste.zip",
+   "caption": "Les alternatives à Epic ont été écartées par un critère : un seul outil qui fasse tout.\n\nL'appel d'offres pour le dossier patient vaudois, publié en septembre 2024, demandait un outil unique intégré, censé remplacer, selon l'établissement, jusqu'à 20 logiciels, avec un engagement du fournisseur sur 20 ans. Trois offres ont été déposées. L'une, une proposition de développement commun, a été jugée non recevable. Des deux offres restantes, une seule remplissait toutes les conditions requises (EMPD, ch. 5.3.4 et 6.3).\n\nFaire du « tout compris » un critère décisif, c'est privilégier ce qui demande le moins d'effort au canton, pas forcément ce qui protège le mieux nos données.\n\nLe bon critère, c'est ce qui protège les patient·e·s et le secret médical. Le reste (développer, adapter, maintenir) s'appelle engager du personnel : des compétences et des salaires d'ici, plutôt que des licences qui partent ailleurs.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "03-2",
+   "slug": "petit-doigt",
+   "title": "Moins de maîtrise",
+   "subtitle": "Le « tout compris » et la perte de maîtrise",
+   "pageLabel": "Carrousel 04",
+   "status": "corrige",
+   "segments": [
+    "argent",
+    "region",
+    "technique",
+    "soignant",
+    "suisse"
+   ],
+   "images": [
+    "03-2/1.png",
+    "03-2/2.png",
+    "03-2/3.png",
+    "03-2/4.png"
+   ],
+   "zip": "epic-non-petit-doigt.zip",
+   "caption": "Moins de travail aujourd'hui, moins de maîtrise demain.\n\nL'appel d'offres pour le dossier patient vaudois, publié en septembre 2024, demandait un outil unique intégré, censé remplacer, selon l'établissement, jusqu'à 20 logiciels, avec un engagement du fournisseur sur 20 ans. Trois offres ont été déposées. L'une, une proposition de développement commun, a été jugée non recevable. Des deux offres restantes, une seule remplissait toutes les conditions requises (EMPD, ch. 5.3.4 et 6.3).\n\nUn seul fournisseur qui fait tout, c'est confortable. Mais c'est aussi renoncer à bâtir ici les compétences qui permettent d'exploiter, de vérifier et, un jour, de changer de système.\n\nLe bon critère, c'est ce qui protège les patient·e·s et le secret médical. Développer, adapter, maintenir : cela s'appelle engager du personnel, des compétences et des salaires d'ici, plutôt que des licences qui partent ailleurs.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "04",
+   "slug": "chez-nous",
+   "title": "C'est chez nous",
+   "subtitle": "Héberger n'est pas contrôler",
+   "pageLabel": "Carrousel 05",
+   "status": "corrige",
+   "segments": [
+    "technique",
+    "suisse",
+    "ia",
+    "secret"
+   ],
+   "images": [
+    "04/1.png",
+    "04/2.png",
+    "04/3.png",
+    "04/4.png"
+   ],
+   "zip": "epic-non-chez-nous.zip",
+   "caption": "L'hébergement en Suisse est une garantie importante, mais il ne suffit pas.\n\nOn nous répète que les données resteront stockées en Suisse, sous contrôle du canton. Sauf qu'héberger n'est pas contrôler : le logiciel reste fermé, personne ne peut vérifier librement ce qu'il fait, pas même le canton, car le code appartient à l'éditeur. Et l'éditeur pourra accéder aux données, y compris depuis l'étranger, pour la maintenance.\n\nEt ce qui peut sortir d'un tel système ne se limite pas aux dossiers des patient·e·s : il y a les métadonnées (qui consulte quoi, quand, à quelle fréquence). Et rien ne permet de vérifier qu'aucun modèle ne sera entraîné sur ces données : un algorithme nourri aux dossiers vaudois pourrait partir sans qu'un seul nom ne quitte le bâtiment. C'est pourquoi nous demandons une base légale et un consentement avant tout usage.\n\nLa souveraineté, ce n'est pas seulement savoir où sont les données. C'est maîtriser le logiciel qui les traite.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "05",
+   "slug": "tout-le-monde",
+   "title": "Tout le monde le fait",
+   "subtitle": "Des logiciels américains, mais pour nos données les plus intimes ?",
+   "pageLabel": "Carrousel 06",
+   "status": "pret",
+   "segments": [
+    "secret",
+    "suisse",
+    "egalite",
+    "argent"
+   ],
+   "images": [
+    "05/1.png",
+    "05/2.png",
+    "05/3.png",
+    "05/4.png"
+   ],
+   "zip": "epic-non-tout-le-monde.zip",
+   "caption": "Si tout le monde utilise des logiciels américains, c'est souvent faute de choix. Un hôpital universitaire, lui, a le choix, et pour nos dossiers médicaux il peut choisir mieux.\n\nOn nous dit : tout est déjà américain. Oui, la dépendance est déjà partout, et c'est justement une raison de ne pas y ajouter nos données les plus intimes : diagnostics, traitements, suivis psychiatriques.\n\nLa dépendance numérique s'est installée parce que, bien souvent, personne ne nous a demandé notre avis. Pour le dossier patient, c'est différent : la décision est publique, et la population peut encore la corriger par référendum.\n\nIl ne s'agit pas de refuser le numérique : il s'agit de refuser qu'on sacrifie, au passage, la confiance qui fonde le soin.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "06",
+   "slug": "dpi-plus",
+   "title": "La solution partagée",
+   "subtitle": "Le DPI+ des HUG et de l'Hôpital du Valais",
+   "pageLabel": "Carrousel 07",
+   "status": "corrige",
+   "segments": [
+    "region",
+    "argent",
+    "soignant",
+    "technique"
+   ],
+   "images": [
+    "06/1.png",
+    "06/2.png",
+    "06/3.png",
+    "06/4.png"
+   ],
+   "zip": "epic-non-dpi-plus.zip",
+   "caption": "Une alternative romande existe. Le Canton l'a écartée, notamment parce qu'elle demandait de bâtir des compétences ici.\n\nEn novembre 2024, les HUG et l'Hôpital du Valais ont proposé au CHUV et à la FHV de co-construire avec eux leur dossier patient, le DPI+. Ce système, co-développé depuis 2024, est issu du dossier conçu en interne par les HUG depuis une trentaine d'années. Les HUG ne sont pas un fournisseur : partager une recette, ce n'est pas cuisiner à votre place.\n\nLe Canton a écarté cette piste : elle aurait exigé de bâtir des compétences informatiques ici, et n'aurait pas été prête avant 2029 selon le DSAS. Au Grand Conseil, on nous a répondu : « ce n'est pas le même périmètre » (25 août 2026).\n\nOr les compétences sont un investissement, pas un défaut : des compétences et des salaires vaudois, de l'argent dépensé ici plutôt qu'en licences. Et ce travail profiterait à tout le monde, Genève comprise.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "07",
+   "slug": "urgence",
+   "title": "C'est urgent",
+   "subtitle": "Une urgence prévisible depuis des années",
+   "pageLabel": "Carrousel 08",
+   "status": "corrige",
+   "segments": [
+    "soignant",
+    "region",
+    "argent",
+    "egalite"
+   ],
+   "images": [
+    "07/1.png",
+    "07/2.png",
+    "07/3.png",
+    "07/4.png"
+   ],
+   "zip": "epic-non-urgence.zip",
+   "caption": "Une vraie urgence ne justifie pas un mauvais choix pour de longues années.\n\nLe système actuel est à bout de souffle, personne ne le conteste. Mais cette urgence était prévisible : la fin du logiciel actuel est annoncée depuis 2021, et les soignant·e·s le critiquent depuis des années. Et le choix engage loin : l'appel d'offres exigeait du fournisseur un engagement sur 20 ans.\n\nAux urgences, on ne donne pas le premier médicament venu : on vérifie d'abord. Prendre le temps de vérifier qu'une solution répond vraiment aux besoins n'est pas un frein à la modernisation : c'en est la condition de réussite. Et une fois un tel système installé, on ne revient pas facilement en arrière.\n\nSi ce décret est refusé, ce ne sera pas une catastrophe : le canton devra relancer la procédure. Un délai, oui, mais surtout une chance de choisir un système qu'on maîtrise.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "08",
+   "slug": "verifier",
+   "title": "La marmite",
+   "subtitle": "Vérifier ce que fait vraiment le logiciel",
+   "pageLabel": "Carrousel 09",
+   "status": "corrige",
+   "segments": [
+    "technique",
+    "secret",
+    "suisse",
+    "argent"
+   ],
+   "images": [
+    "08/1.png",
+    "08/2.png",
+    "08/3.png",
+    "08/4.png"
+   ],
+   "zip": "epic-non-verifier.zip",
+   "caption": "On ne peut pas garantir le secret médical avec un logiciel qu'on ne peut pas examiner librement.\n\nLe logiciel d'Epic est propriétaire et fermé. L'analyser sans l'accord de l'éditeur expose à des risques juridiques : la licence, le droit d'auteur et, aux États-Unis, le DMCA et ses règles anti-contournement. Et l'appel d'offres exigeait du fournisseur un engagement sur vingt ans.\n\nLe juriste Lawrence Lessig l'a résumé en 2000 : « code is law », le code fait loi. Ce qui gouverne un système informatique, ce n'est pas le contrat signé autour, c'est le code qui tourne dedans. Si on ne peut pas lire le code, on ne peut pas vérifier que la loi est respectée.\n\nUn dossier patient doit avoir un code ouvert, ou au minimum un droit d'audit indépendant complet.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "09",
+   "slug": "qui-verifie",
+   "title": "Qui vérifie",
+   "subtitle": "Un contrat sans contrôle, c'est une promesse",
+   "pageLabel": "Carrousel 10",
+   "status": "corrige",
+   "segments": [
+    "technique",
+    "suisse",
+    "argent",
+    "region"
+   ],
+   "images": [
+    "09/1.png",
+    "09/2.png",
+    "09/3.png",
+    "09/4.png"
+   ],
+   "zip": "epic-non-qui-verifie.zip",
+   "caption": "Un contrat ne suffit pas si personne n'a les compétences pour vérifier qu'il est respecté.\n\nLes partisans d'Epic misent sur le contrat et sur le décret de gouvernance. Ce décret prévoit un audit financier et opérationnel externe une fois par an : il porte sur les coûts et la mise en œuvre, pas sur le code ni sur l'accès aux données. Et la commission stratégique compte un expert juridique en protection des données, avec voix consultative seulement. Parmi les opposant·e·s, on trouve des spécialistes du numérique : ils misent sur la compétence interne.\n\nCar le contrôle ne se sous-traite pas. Pour exploiter et vérifier un système qui contient nos données les plus intimes, le canton doit garder ses propres compétences. Avec une solution clé en main, il risque de les perdre.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  {
+   "id": "11",
+   "slug": "plus-vendu",
+   "title": "Le plus vendu",
+   "subtitle": "Le plus vendu n'est pas le plus sûr",
+   "pageLabel": "Carrousel 12",
+   "status": "corrige",
+   "segments": [
+    "region",
+    "suisse",
+    "argent",
+    "soignant",
+    "technique"
+   ],
+   "images": [
+    "11/1.png",
+    "11/2.png",
+    "11/3.png",
+    "11/4.png"
+   ],
+   "zip": "epic-non-plus-vendu.zip",
+   "caption": "Le plus vendu n'est pas le meilleur choix pour protéger nos données de santé.\n\n« Epic est le plus vendu » : l'argument revient sans cesse. C'est vrai aux États-Unis, où Epic équipe 43,7 % des hôpitaux de soins aigus (KLAS 2026, chiffres 2025). Mais dire qu'un logiciel est le meilleur parce qu'il se vend le plus, c'est donner à McDonald's une place au guide Michelin.\n\nTous les hôpitaux du monde fonctionnent avec un dossier patient, et Epic n'en est qu'un éditeur parmi d'autres. La Suisse en produit plusieurs (KISIM de la société zurichoise CISTEC, le dossier patient des HUG…), et la Suisse romande a déjà une piste : le DPI+, que les HUG et l'Hôpital du Valais co-développent depuis 2024. Il existe aussi des solutions internationales libres, sans frais de licence, comme GNU Health.\n\nPour un hôpital, le bon critère n'est pas la part de marché. C'est ce qui protège les patient·e·s et le secret médical.\n\nSuisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.\n\n#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  }
+ ]
+}

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrousels · EPIC-NON</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<!--
+  One 1080x1350 (4:5) carousel slide per URL, drawn as a still of the animated stories (flyer/motion.html):
+  same segment colour fields, Plex Sans Condensed 700 display / Plex Sans text, same caps labels and cards.
+
+    ?c=<carousel id>&n=<1..4>   one slide, nothing else (tools/render-carousels.py screenshots it)
+    ?all=1                      contact sheet of every carousel
+    ?data=<same-origin url>     test data instead of ../data/points.json
+
+  Data: points.json top-level "carrousels" (merge plan §C.1). Slide kinds:
+    fait (alias accroche)   claim or question on the carousel's first segment colour (story hook)
+    hic                     « Voici le hic » + explanation card on paper (story compare)
+    demande (alias analogie) reframing + analogy on the segment tint (story point)
+    signer                  shared call to sign on signal red, generated from "campaign" (story CTA)
+  In a title, « | » marks where the accent starts (« Héberger | n'est pas contrôler. »).
+  Text is fitted inside its safe area; anything still too long sets data-overflow on the slide and on <body>
+<style>@media print{.preview-banner{display:none!important}}.bare .preview-banner,.embed .preview-banner{display:none!important}</style><div class="preview-banner" style="position:sticky;top:0;z-index:99;background:#fff3a3;color:#16181B;font:600 14px/1.4 system-ui,sans-serif;padding:6px 16px;text-align:center">Aperçu de travail, à ne pas diffuser · <a href="../../index.html" style="color:inherit">retour à l'aperçu</a></div>.
+-->
+<style>
+  :root { --paper: #F6F4EF; --ink: #16181B; --inkSoft: #4B5058; --card: #ECEAE4; --signal: #D52B1E; --signalInk: #FFFFFF; }
+  html, body { margin: 0; }
+  body { background: #111; color: #eee; font: 14px/1.4 'IBM Plex Sans', system-ui, sans-serif; }
+  body.one { background: transparent; overflow: hidden; }
+
+  /* ---- Slide: 1080x1350, PAD 96 as in the stories ---- */
+  .slide { position: relative; width: 1080px; height: 1350px; box-sizing: border-box; padding: 96px 96px 88px;
+    display: flex; flex-direction: column; overflow: hidden; background: var(--bg); color: var(--fg);
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+  .caps { font: 700 30px/1.12 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; text-transform: uppercase; margin: 0; }
+  .disp { font-family: 'IBM Plex Sans Condensed', 'Arial Narrow', Arial, sans-serif; font-weight: 700; margin: 0; }
+  .txt { font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; font-weight: 400; margin: 0; }
+  .acc { color: var(--accent); }
+  [style*="--rule"] .acc { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-decoration-thickness: .12em; text-underline-offset: .14em; text-decoration-skip-ink: none; }
+
+  .hd { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px; flex: none; }
+  .hd .who { color: var(--head); }
+  .hd .who span { display: block; }
+  .hd .who .ref { opacity: .78; }
+  .hd .ct { color: var(--head); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* Safe area: everything between header and footer must fit here. */
+  .safe { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; overflow: hidden; }
+  .k-fait .safe, .k-signer .safe { justify-content: center; padding: 56px 0 40px; }
+  .k-hic .safe, .k-demande .safe { padding-top: 120px; }
+
+  .lab { color: var(--accent); margin-bottom: 36px; }
+  .title { letter-spacing: -0.01em; }
+  .card { background: var(--cardBg); padding: 56px 48px 60px; margin-top: 64px; }
+
+  .ft { flex: none; display: flex; flex-direction: column; gap: 22px; margin-top: 40px; }
+  .src { font: 400 26px/1.3 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif; color: var(--soft); margin: 0; }
+  .url { color: var(--head); white-space: nowrap; font-size: 36px; line-height: 1; }
+  .nw { white-space: nowrap; }
+  .k-signer .bigurl { white-space: nowrap; margin-top: 64px; }
+
+  /* ---- Contact sheet ---- */
+  .sheet { padding: 24px; }
+  .sheet h2 { font: 600 16px/1.3 'IBM Plex Sans', sans-serif; margin: 28px 0 10px; color: #ddd; }
+  .sheet h2 small { color: #999; font-weight: 400; }
+  .row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .thumb { width: 324px; height: 405px; overflow: hidden; position: relative; outline: 1px solid #333; }
+  .thumb .slide { transform: scale(.3); transform-origin: 0 0; position: absolute; left: 0; top: 0; }
+  .thumb[data-overflow] { outline: 4px solid #ff3b30; }
+  .warn { color: #ffb4a8; font-size: 13px; margin: 6px 0 0; }
+  .err { padding: 40px; color: #ffb4a8; font: 600 22px/1.4 'IBM Plex Sans', sans-serif; white-space: pre-wrap; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script type="module">
+const params = new URLSearchParams(location.search);
+const W = 1080, H = 1350;
+const MONTHS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
+const KIND = { fait: 'fait', accroche: 'fait', hic: 'hic', demande: 'demande', analogie: 'demande', signer: 'signer' };
+const LABEL = { hic: 'Voici le hic', demande: 'Ce que nous demandons', analogie: 'Autrement dit' };
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+// fr-CH typography: narrow no-break space (U+202F) before ? ! : ; and inside « ». Idempotent.
+const fr = s => String(s ?? '')
+  .replace(/[ \u00A0\u202F]+([?!:;»])/g, '\u202F$1')
+  .replace(/«[ \u00A0\u202F]+/g, '«\u202F')
+  // Keep a number with its unit or month on one line (« 28 novembre », « 43,7 % », « 207,6 millions »).
+  .replace(/(\d) (?=(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre|%|millions?|milliards?|francs|ans|logiciels)(?![\p{L}]))/gu, '$1\u00A0');
+// Escaped, typeset text; hyphenated words never break at the hyphen (the stories wrap on spaces only).
+const h = s => esc(fr(s)).replace(/[^\s\u202F]*\p{L}-\p{L}[^\s\u202F]*/gu, w => `<span class="nw">${w}</span>`);
+const day = iso => { const [, m, d] = String(iso).split('-').map(Number); return `${d === 1 ? '1er' : d} ${MONTHS[m - 1]}`; };
+
+// Data: same origin only, so a test URL can never make the page fetch from elsewhere.
+function sameOrigin(u) { const url = new URL(u, location.href); if (url.origin !== location.origin) throw new Error('data: même origine uniquement'); return url.href; }
+const getJSON = u => fetch(sameOrigin(u), { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(`${u} : HTTP ${r.status}`); return r.json(); });
+
+let tokens, lib;
+try {
+  [tokens, lib] = await Promise.all([getJSON('../data/tokens.json'), getJSON(params.get('data') || '../data/points.json')]);
+  if (!Array.isArray(lib.carrousels) || !lib.carrousels.length) throw new Error('points.json ne contient pas de tableau « carrousels » (plan §C.1).');
+} catch (e) {
+  $('#stage').innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  document.body.dataset.overflow = 'error: ' + e.message; window.__ready = true; throw e;
+}
+const C = tokens.color, defs = lib.carrouselDefaults || {}, camp = lib.campaign;
+const byId = Object.fromEntries(lib.points.map(p => [p.id, p]));
+const labels = { ...LABEL, ...(defs.labels || {}) };
+
+// Colours of a segment, resolved exactly as motion.html does.
+function palette(seg) {
+  const c = tokens.segments[seg];
+  if (!c) throw new Error('Segment inconnu : ' + seg);
+  const dark = c.primary === '#0B0F14';                 // technique: black field, phosphor green on it
+  // A near-grey primary (argent: slate) does not stand out from ink on paper: the accent words then
+  // keep the ink and get a rule in the segment's second colour (amber) instead.
+  const rgb = [1, 3, 5].map(i => parseInt(c.primary.slice(i, i + 2), 16));
+  const grey = !dark && Math.max(...rgb) - Math.min(...rgb) < 40;
+  return { ...c, accent: dark ? '#2F6B12' : c.primary, rule: grey ? c.onPrimary : '' };
+}
+
+// Title with optional « | » accent split; the accent part takes --accent.
+function titleHTML(t, accent = true) {
+  const [a, b] = String(t).split('|').map(x => x.trim());
+  if (b === undefined || !accent) return h(b === undefined ? a : `${a} ${b}`);
+  return `${h(a)} <span class="acc">${h(b)}</span>`;
+}
+
+// Source line: a point id resolves to that point's source text; anything else is printed as given.
+function sourceText(src, problems) {
+  if (!src) return '';
+  if (/^[a-z0-9-]+$/.test(src)) {
+    const p = byId[src];
+    if (!p) { problems.push(`source « ${src} » : point absent de la bibliothèque`); return ''; }
+    if (p.source?.tbc) problems.push(`tbc source ${src} : ${p.source.tbc}`);
+    return p.source?.text || '';
+  }
+  return src;
+}
+
+const fitSpec = {   // [max px, min px, line-height] per role and kind; sizes from the stories at the same 1080 width
+  fait:    { title: [112, 76, 1.06], text: [58, 42, 1.22] },
+  hic:     { title: [86, 60, 1.1], text: [52, 38, 1.28] },
+  demande: { title: [92, 64, 1.08], text: [58, 40, 1.25] },
+  signer:  { lead: [64, 48, 1.1], title: [112, 80, 1.04], text: [48, 36, 1.3], url: [104, 80, 1] },
+};
+
+function slideHTML(car, n) {
+  const slide = car.slides[n - 1];
+  if (!slide) throw new Error(`Carrousel ${car.id} : pas de diapositive ${n}`);
+  const kind = KIND[slide.kind];
+  if (!kind) throw new Error(`Carrousel ${car.id}/${n} : type inconnu « ${slide.kind} »`);
+  const seg = (car.segments || [])[0];
+  const pal = palette(seg), problems = [];
+  const total = car.slides.length;
+  let bg, fg, head, soft, accent, cardBg = pal.tint, body = '';
+  const src = fr(sourceText(slide.source, problems));
+  const fit = (role, cls, html, tag = 'p') => `<${tag} class="${cls} fit" data-role="${role}">${html}</${tag}>`;
+
+  if (kind === 'fait') {
+    bg = pal.primary; fg = pal.onPrimary; head = pal.onPrimary; soft = pal.onPrimary; accent = pal.onPrimary;
+    body = (slide.label ? `<p class="caps lab">${h(slide.label)}</p>` : '')
+      + fit('title', 'disp title', titleHTML(slide.title, false), 'h1')
+      + (slide.text ? `<div class="gap"></div>` + fit('text', 'txt', h(slide.text)) : '');
+  } else if (kind === 'hic') {
+    bg = C.paper; fg = C.ink; head = C.inkSoft; soft = C.inkSoft; accent = pal.accent;
+    body = `<p class="caps lab">${h(slide.label || labels.hic)}</p>`
+      + fit('title', 'disp title', titleHTML(slide.title), 'h1')
+      + (slide.text ? `<div class="card">${fit('text', 'txt', h(slide.text))}</div>` : '');
+  } else if (kind === 'demande') {
+    bg = pal.tint; fg = C.ink; head = C.inkSoft; soft = C.inkSoft; accent = pal.accent;
+    body = `<p class="caps lab">${h(slide.label || labels[slide.kind] || labels.demande)}</p>`
+      + fit('title', 'disp title', titleHTML(slide.title), 'h1')
+      + (slide.text ? `<div class="gap"></div>` + fit('text', 'txt', h(slide.text)) : '');
+  } else {
+    // Shared call to sign (user decision 4), generated from campaign data; never from per-carousel text.
+    bg = C.signal; fg = C.signalInk; head = C.signalInk; soft = C.signalInk; accent = C.signalInk;
+    const legal = camp.legalDeadline ? ` (délai officiel : ${day(camp.legalDeadline)})` : '';
+    body = fit('lead', 'disp', esc(fr('Suisse·sse et domicilié·e dans le canton de Vaud ?')))
+      + `<div class="gap"></div>` + fit('title', 'disp title', esc(fr('Signez et faites signer le référendum')), 'h1')
+      + `<div class="gap"></div>` + fit('text', 'txt', esc(fr(`Feuille sans timbre à télécharger sur `)) + `<span class="nw">${esc(camp.url)}</span>` + esc(fr(`, à renvoyer avant le ${day(camp.deadline)}${legal}.`)))
+      + fit('url', 'disp bigurl', esc(camp.url));
+  }
+  // Word caps from the data spec (informational: reported, never cut).
+  const f = defs.format || {};
+  const words = s => String(s || '').split(/[\s|]+/).filter(w => /[\p{L}\p{N}]/u.test(w)).length;
+  if (kind !== 'signer' && f.titleMaxWords && words(slide.title) > f.titleMaxWords) problems.push(`titre : ${words(slide.title)} mots > ${f.titleMaxWords}`);
+  if (kind !== 'signer' && f.textMaxWords && words(slide.text) > f.textMaxWords) problems.push(`texte : ${words(slide.text)} mots > ${f.textMaxWords}`);
+  if (slide.fix?.type === 'tbc') problems.push(`tbc : ${slide.fix.why}`);
+  // Wordings the fact-check or the tone decision removed: a hard error, like an overflow.
+  const banned = /petit bonhomme orange|contrat bidon|dirigeants étrangers|pré-?affranchie|dix ans|10 ans/i;
+  const shown = [slide.label, slide.title, slide.text].join(' ');
+  const bannedHit = shown.match(banned)?.[0] || '';
+
+  const rule = (kind === 'hic' || kind === 'demande') && pal.rule ? `;--rule:${pal.rule}` : '';
+  const style = `--bg:${bg};--fg:${fg};--head:${head};--soft:${soft};--accent:${accent};--cardBg:${cardBg}${rule}`;
+  const segLabel = tokens.segments[seg].label;
+  return `<section class="slide k-${kind}" style="${style}" data-c="${esc(car.id)}" data-n="${n}" data-kind="${kind}" data-notes="${esc(problems.join(' | '))}"${bannedHit ? ` data-banned="${esc(bannedHit)}"` : ''}>
+    <header class="hd"><p class="caps who"><span class="ref">Référendum cantonal vaudois</span><span>${esc(fr(segLabel))}</span></p><p class="caps ct">${n}/${total}</p></header>
+    <main class="safe">${body}</main>
+    <footer class="ft">${src ? `<p class="src">Source\u202F: ${h(src)}</p>` : ''}${kind === 'signer' ? '' : `<p class="disp url">${esc(camp.url)}</p>`}</footer>
+  </section>`;
+}
+
+// Fit: scale every fitted block of a slide together (keeps the hierarchy) from max down to its min,
+// until the safe area holds its content. Measured with layout sizes, so it works inside scaled thumbnails.
+function fitSlide(el) {
+  const kind = el.dataset.kind, spec = fitSpec[kind];
+  const blocks = [...el.querySelectorAll('.fit')];
+  const gaps = [...el.querySelectorAll('.gap')];
+  const safe = el.querySelector('.safe');
+  const apply = k => {
+    blocks.forEach(b => {
+      const [max, min, lh] = spec[b.dataset.role];
+      const px = Math.max(min, Math.round(max * k));
+      b.style.fontSize = px + 'px'; b.style.lineHeight = lh;
+    });
+    gaps.forEach(g => { g.style.height = Math.round(48 * k) + 'px'; });
+  };
+  const content = () => [...safe.children].reduce((h, c) => {
+    const cs = getComputedStyle(c);
+    return h + c.offsetHeight + parseFloat(cs.marginTop) + parseFloat(cs.marginBottom);
+  }, 0) + parseFloat(getComputedStyle(safe).paddingTop) + parseFloat(getComputedStyle(safe).paddingBottom);
+  const tooWide = () => blocks.some(b => b.scrollWidth > b.clientWidth + 1);
+  let k = 1;
+  apply(k);
+  while ((content() > safe.clientHeight + 0.5 || tooWide()) && k > 0.6) { k -= 0.02; apply(k); }
+  // A title that needs more room than its role allows also breaks the type scale: flag it too.
+  const over = content() > safe.clientHeight + 0.5 || tooWide() || el.scrollHeight > H + 0.5;
+  if (over) el.dataset.overflow = `+${Math.ceil(content() - safe.clientHeight)} px`;
+  if (el.dataset.banned) { el.dataset.overflow = `formulation écartée « ${el.dataset.banned} »`; return true; }
+  el.dataset.scale = k.toFixed(2);
+  return over;
+}
+
+await Promise.all(["700 100px 'IBM Plex Sans Condensed'", "400 100px 'IBM Plex Sans'"].map(f => document.fonts.load(f, 'AÀÉÈÇÔŒœàéèêëçôûüîï’«»0123456789·')));
+await document.fonts.ready;
+
+const stage = $('#stage');
+const report = [];
+try {
+  if (params.get('all') === '1') {
+    stage.className = 'sheet';
+    stage.innerHTML = lib.carrousels.map(car => `<h2>${esc(car.id)} · ${esc(fr(car.title))} <small>${esc(car.slug)} · ${esc((car.segments || [])[0])} · ${esc(car.status || '')}</small></h2>
+      <div class="row">${car.slides.map((_, i) => `<div class="thumb">${slideHTML(car, i + 1)}</div>`).join('')}</div><p class="warn" data-for="${esc(car.id)}"></p>`).join('');
+    stage.querySelectorAll('.slide').forEach(s => {
+      if (fitSlide(s)) { s.parentElement.dataset.overflow = s.dataset.overflow; report.push(`${s.dataset.c}/${s.dataset.n} ${s.dataset.overflow}`); }
+    });
+    stage.querySelectorAll('.warn').forEach(w => {
+      const notes = [...stage.querySelectorAll(`.slide[data-c="${w.dataset.for}"]`)].map(s => [s.dataset.n, s.dataset.overflow ? 'DÉBORDE ' + s.dataset.overflow : '', s.dataset.notes].filter(Boolean)).filter(x => x.length > 1).map(x => x.join(' · '));
+      w.textContent = notes.join('  —  ');
+    });
+  } else {
+    const id = params.get('c') || lib.carrousels[0].id, n = +(params.get('n') || 1);
+    const car = lib.carrousels.find(c => c.id === id);
+    if (!car) throw new Error('Carrousel inconnu : ' + id);
+    document.body.classList.add('one');
+    stage.innerHTML = slideHTML(car, n);
+    const s = stage.firstElementChild;
+    if (fitSlide(s)) report.push(`${id}/${n} ${s.dataset.overflow}`);
+    document.body.dataset.notes = s.dataset.notes;
+    document.body.dataset.scale = s.dataset.scale;
+  }
+} catch (e) {
+  stage.innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  report.push('error: ' + e.message);
+}
+document.body.dataset.overflow = report.length ? report.join(' | ') : 'none';   // read by tools/render-carousels.py
+window.__overflow = report;
+window.__ready = true;
+</script>
+</body>
+</html>

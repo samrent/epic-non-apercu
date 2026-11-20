@@ -1,0 +1,66 @@
+{
+  "built": "2026-11-20T21:16:12+01:00",
+  "all": {
+    "pdf": "out/epic-non-flyers-A5-tous.pdf",
+    "a4": "out/epic-non-flyers-A4-2par-feuille-tous.pdf",
+    "couleur": "out/epic-non-flyers-A5-couleur-imprimeur-tous.pdf"
+  },
+  "segments": {
+    "secret": {
+      "pdf": "out/secret/epic-non-secret-A5.pdf",
+      "a4": "out/secret/epic-non-secret-A4-2par-feuille.pdf",
+      "couleur": "out/secret/epic-non-secret-A5-couleur-imprimeur.pdf",
+      "recto": "out/secret/epic-non-secret-recto.png",
+      "verso": "out/secret/epic-non-secret-verso.png"
+    },
+    "soignant": {
+      "pdf": "out/soignant/epic-non-soignant-A5.pdf",
+      "a4": "out/soignant/epic-non-soignant-A4-2par-feuille.pdf",
+      "couleur": "out/soignant/epic-non-soignant-A5-couleur-imprimeur.pdf",
+      "recto": "out/soignant/epic-non-soignant-recto.png",
+      "verso": "out/soignant/epic-non-soignant-verso.png"
+    },
+    "suisse": {
+      "pdf": "out/suisse/epic-non-suisse-A5.pdf",
+      "a4": "out/suisse/epic-non-suisse-A4-2par-feuille.pdf",
+      "couleur": "out/suisse/epic-non-suisse-A5-couleur-imprimeur.pdf",
+      "recto": "out/suisse/epic-non-suisse-recto.png",
+      "verso": "out/suisse/epic-non-suisse-verso.png"
+    },
+    "argent": {
+      "pdf": "out/argent/epic-non-argent-A5.pdf",
+      "a4": "out/argent/epic-non-argent-A4-2par-feuille.pdf",
+      "couleur": "out/argent/epic-non-argent-A5-couleur-imprimeur.pdf",
+      "recto": "out/argent/epic-non-argent-recto.png",
+      "verso": "out/argent/epic-non-argent-verso.png"
+    },
+    "egalite": {
+      "pdf": "out/egalite/epic-non-egalite-A5.pdf",
+      "a4": "out/egalite/epic-non-egalite-A4-2par-feuille.pdf",
+      "couleur": "out/egalite/epic-non-egalite-A5-couleur-imprimeur.pdf",
+      "recto": "out/egalite/epic-non-egalite-recto.png",
+      "verso": "out/egalite/epic-non-egalite-verso.png"
+    },
+    "ia": {
+      "pdf": "out/ia/epic-non-ia-A5.pdf",
+      "a4": "out/ia/epic-non-ia-A4-2par-feuille.pdf",
+      "couleur": "out/ia/epic-non-ia-A5-couleur-imprimeur.pdf",
+      "recto": "out/ia/epic-non-ia-recto.png",
+      "verso": "out/ia/epic-non-ia-verso.png"
+    },
+    "technique": {
+      "pdf": "out/technique/epic-non-technique-A5.pdf",
+      "a4": "out/technique/epic-non-technique-A4-2par-feuille.pdf",
+      "couleur": "out/technique/epic-non-technique-A5-couleur-imprimeur.pdf",
+      "recto": "out/technique/epic-non-technique-recto.png",
+      "verso": "out/technique/epic-non-technique-verso.png"
+    },
+    "region": {
+      "pdf": "out/region/epic-non-region-A5.pdf",
+      "a4": "out/region/epic-non-region-A4-2par-feuille.pdf",
+      "couleur": "out/region/epic-non-region-A5-couleur-imprimeur.pdf",
+      "recto": "out/region/epic-non-region-recto.png",
+      "verso": "out/region/epic-non-region-verso.png"
+    }
+  }
+}

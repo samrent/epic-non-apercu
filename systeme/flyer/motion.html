@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="fr-CH">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flyer animé · EPIC-NON</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  body { margin: 0; background: #111; color: #eee; font: 14px/1.4 system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; }
+  .bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding: 10px 16px; width: 100%; box-sizing: border-box; background: #1b1b1b; position: sticky; top: 0; }
+  .bar select, .bar button { font: inherit; padding: 4px 10px; }
+  #scrub { flex: 1; min-width: 200px; }
+  canvas { height: calc(100vh - 120px); max-width: 95vw; aspect-ratio: 9 / 16; margin: 12px; background: #000; }
+  .meta { font-variant-numeric: tabular-nums; color: #aaa; }
+  /* Embed mode (?embed=1): canvas only, fills the frame, loops. Used by the studio. */
+  body.embed { background: transparent; overflow: hidden; }
+  body.embed .bar { display: none; }
+  body.embed canvas { height: 100vh; width: auto; max-width: 100vw; margin: 0; display: block; }
+</style>
+</head>
+<body>
+<style>@media print{.preview-banner{display:none!important}}.bare .preview-banner,.embed .preview-banner{display:none!important}</style><div class="preview-banner" style="position:sticky;top:0;z-index:99;background:#fff3a3;color:#16181B;font:600 14px/1.4 system-ui,sans-serif;padding:6px 16px;text-align:center">Aperçu de travail, à ne pas diffuser · <a href="../../index.html" style="color:inherit">retour à l'aperçu</a></div>
+<div class="bar">
+  <label>Segment <select id="seg"></select></label>
+  <button id="play">Lecture</button>
+  <input type="range" id="scrub" min="0" value="0">
+  <span class="meta" id="meta"></span>
+  <button id="export">Exporter WebM</button>
+</div>
+<canvas id="c" width="1080" height="1920"></canvas>
+
+<script type="module">
+import { loadSystem } from '../lib/data.js?v=7';
+import { bezier, prog, readHold, textBlock, clamp } from '../lib/motion.js?v=7';
+
+const sys = await loadSystem();
+const T = sys.tokens, M = T.motion, C = T.color;
+const E = Object.fromEntries(Object.entries(M.ease).filter(([k]) => !k.startsWith('$')).map(([k, v]) => [k, bezier(v)]));
+const W = 1080, H = 1920, PAD = 96, MAXW = W - 2 * PAD;
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const $ = s => document.querySelector(s);
+const params = new URLSearchParams(location.search);
+
+const fill = c => { ctx.fillStyle = c; ctx.fillRect(0, 0, W, H); };
+const caps = (t, x, y, color, size = 30) => textBlock(ctx, { text: t.toUpperCase(), x, y, maxW: MAXW, size, weight: 650, color });
+// Position + velocity of an eased move (velocity in px/frame feeds the blur).
+const move = (l, at, frames, from, to, ease) => {
+  const v = p => from + (to - from) * ease(clamp(p));
+  const p = prog(l, at, frames), p0 = prog(l - 1, at, frames);
+  return { x: v(p), v: v(p) - v(p0) };
+};
+
+function buildFilm(segId) {
+  const s = sys.resolve(segId), col = s.color, rate = M.readRate, F = M.frames;
+  const others = sys.segmentIds.filter(id => id !== segId).map(id => sys.lib.segments[id].reel);
+  const reelItems = [...others, s.reel + ' ?'];
+  const h = s.hero, p2 = s.rest[0];
+  const scenes = [];
+
+  // 1. Reel: "Qui contrôle …" lands on the segment's own word (slot reel, hard stop, small overshoot).
+  {
+    const n = reelItems.length, pitch = 132, spin1 = 14, hold1 = 4, spin2 = 12, settle = 4;
+    const land = spin1 + hold1 + spin2;
+    const hold = readHold('Qui contrôle ' + s.reel, rate) + 6;
+    const offAt = l => {
+      const a = (n - 3) * pitch, b = (n - 1) * pitch;
+      if (l < spin1) return a * E.inOutCubic(prog(l, 0, spin1));
+      if (l < spin1 + hold1) return a;
+      if (l < land) return a + (b - a + 8) * E.inHardStop(prog(l, spin1 + hold1, spin2));
+      return b + 8 * (1 - E.outCubic(prog(l, land, settle)));
+    };
+    scenes.push({ id: 'reel', frames: land + settle + hold, draw(l) {
+      fill(C.paper);
+      caps('Référendum cantonal · Vaud', PAD, 220, C.inkSoft);
+      textBlock(ctx, { text: 'Qui contrôle', x: PAD, y: 820, maxW: MAXW, size: 110, color: C.ink });
+      const off = offAt(l), vy = off - offAt(l - 1), baseY = 970;
+      // Reel window starts just below the fixed line so the passing words never touch it.
+      ctx.save(); ctx.beginPath(); ctx.rect(0, baseY - 112, W, pitch * 2.6); ctx.clip();
+      reelItems.forEach((t, i) => {
+        const y = baseY + i * pitch - off;
+        if (y < baseY - pitch * 2 || y > baseY + pitch * 2) return;
+        const isT = i === n - 1, landed = l >= land;
+        // Once landed, only the segment's word stays: the line must read as one sentence.
+        if (landed && !isT) return;
+        textBlock(ctx, { text: t, x: PAD, y, maxW: MAXW * 1.2, size: 104, vy: -vy,
+          color: isT && landed ? col.primary : C.ink, alpha: isT && landed ? 1 : 0.22 });
+      });
+      ctx.restore();
+    }});
+  }
+
+  // 2. Hook: colour cut to the segment colour, whip-in from the right, stepped scale on the hold.
+  {
+    const hold = readHold(s.hook, rate);
+    scenes.push({ id: 'hook', frames: F.arrive + hold, draw(l) {
+      fill(col.primary);
+      caps(col.label, PAD, 220, col.onPrimary);
+      const m = move(l, 0, F.arrive, 380, 0, E.outExpo);
+      const size = l >= F.arrive + Math.floor(hold / 2) ? 112 * 1.06 : 112; // stepped, never tweened
+      textBlock(ctx, { text: s.hook, x: PAD + m.x, y: 760, maxW: MAXW, size, color: col.onPrimary, vx: m.v });
+    }});
+  }
+
+  // 3. Essential + comparison: two cards arrive from opposite sides, the reader sees both sides at once.
+  {
+    const a1 = F.arrive + 12, a2 = a1 + F.arrive + readHold(h.compare.left.text, rate);
+    const end = a2 + F.arrive + readHold(h.compare.right.text, rate) + F.settle;
+    scenes.push({ id: 'compare', frames: end, draw(l) {
+      fill(C.paper);
+      const e = move(l, 0, F.arrive, 60, 0, E.outCubic);
+      textBlock(ctx, { text: h.essential, x: PAD, y: 300 + e.x, maxW: MAXW, size: 62, weight: 650, color: C.ink, vy: e.v, lh: 1.2 });
+      const card = (at, dx, y, bg, lab, labCol, txt, w) => {
+        if (l < at) return;
+        const m = move(l, at, F.arrive, dx, 0, E.outExpo);
+        ctx.save(); ctx.translate(m.x, 0);
+        ctx.fillStyle = bg; ctx.fillRect(PAD, y, MAXW, 380);
+        caps(lab, PAD + 48, y + 80, labCol, 30);
+        textBlock(ctx, { text: txt, x: PAD + 48, y: y + 170, maxW: MAXW - 96, size: 66, weight: w, color: C.ink, vx: m.v });
+        ctx.restore();
+      };
+      card(a1, -W, 820, '#ECEAE4', h.compare.left.label, C.inkSoft, h.compare.left.text, 400);
+      card(a2, W, 1240, col.tint, h.compare.right.label, col.primary === '#0B0F14' ? '#2F6B12' : col.primary, h.compare.right.text, 800);
+      textBlock(ctx, { text: 'Source : ' + h.source.text, x: PAD, y: 1720, maxW: MAXW, size: 28, weight: 400, color: C.inkSoft });
+    }});
+  }
+
+  // 4. Second point, then a whip-out that the CTA cut hides inside (cut on motion).
+  if (p2) {
+    const hold = readHold(p2.title + ' ' + p2.essential, rate), out = F.whip;
+    scenes.push({ id: 'point', frames: F.arrive + hold + out, draw(l) {
+      fill(col.tint);
+      const m = l < F.arrive + hold ? move(l, 0, F.arrive, 380, 0, E.outExpo) : move(l, F.arrive + hold, out, 0, -700, E.inExpo);
+      const titleCol = col.primary === '#0B0F14' ? C.ink : col.primary;
+      const th = textBlock(ctx, { text: p2.title, x: PAD + m.x, y: 620, maxW: MAXW, size: 92, color: titleCol, vx: m.v });
+      textBlock(ctx, { text: p2.essential, x: PAD + m.x, y: 620 + th + 60, maxW: MAXW, size: 58, weight: 400, color: C.ink, vx: m.v, lh: 1.25 });
+    }});
+  }
+
+  // 5. Call to act: signal red, stepped scale, hero hold.
+  scenes.push({ id: 'cta', frames: F.hero + 18, draw(l) {
+    fill(C.signal);
+    const size = l >= 12 ? 120 * 1.08 : 120;
+    const hh = textBlock(ctx, { text: sys.lib.campaign.deadlineLabel, x: PAD, y: 820, maxW: MAXW, size, color: C.signalInk });
+    textBlock(ctx, { text: sys.lib.campaign.url, x: PAD, y: 820 + hh + 80, maxW: MAXW, size: 72, weight: 650, color: C.signalInk });
+  }});
+
+  // 6. Tail: the cross-party closer.
+  scenes.push({ id: 'tail', frames: 30, draw(l) {
+    fill(C.paper);
+    textBlock(ctx, { text: sys.lib.closer, x: PAD, y: 860, maxW: MAXW, size: 72, color: col.primary === '#0B0F14' ? C.ink : col.primary });
+    caps('Référendum cantonal · Vaud · ' + sys.lib.campaign.url, PAD, 1700, C.inkSoft, 28);
+  }});
+
+  let start = 0; scenes.forEach(sc => { sc.start = start; start += sc.frames; });
+  return { scenes, total: start };
+}
+
+let film, frame = 0, playing = false, timer = null;
+function draw(f) {
+  const sc = film.scenes.find(s => f >= s.start && f < s.start + s.frames) || film.scenes.at(-1);
+  sc.draw(f - sc.start);
+  $('#meta').textContent = `${String(f).padStart(3, '0')} / ${film.total - 1} · ${(f / M.fps).toFixed(2)} s · ${sc.id}`;
+  $('#scrub').value = f;
+}
+function load(seg) {
+  film = buildFilm(seg); frame = 0; $('#scrub').max = film.total - 1; draw(0);
+  const u = new URL(location); u.searchParams.set('segment', seg); history.replaceState(null, '', u);
+}
+function play(on) {
+  playing = on; $('#play').textContent = on ? 'Pause' : 'Lecture';
+  clearInterval(timer);
+  if (on) timer = setInterval(() => { frame = (frame + 1) % film.total; draw(frame); }, 1000 / M.fps);
+}
+
+const sel = $('#seg');
+sys.segmentIds.forEach(id => sel.add(new Option(T.segments[id].label, id)));
+sel.value = params.get('segment') || 'secret';
+sel.onchange = () => { play(false); load(sel.value); };
+$('#play').onclick = () => play(!playing);
+$('#scrub').oninput = e => { play(false); frame = +e.target.value; draw(frame); };
+addEventListener('keydown', e => {
+  if (e.key === ' ') { e.preventDefault(); play(!playing); }
+  if (e.key === 'ArrowRight') { play(false); frame = Math.min(film.total - 1, frame + 1); draw(frame); }
+  if (e.key === 'ArrowLeft') { play(false); frame = Math.max(0, frame - 1); draw(frame); }
+});
+// Real-time recording of the whole film; resolves with a WebM blob. onProgress(0..1).
+function exportWebM(onProgress = () => {}) {
+  return new Promise(resolve => {
+    play(false);
+    const rec = new MediaRecorder(cv.captureStream(M.fps), { mimeType: 'video/webm;codecs=vp9', videoBitsPerSecond: 8e6 });
+    const chunks = []; rec.ondataavailable = e => chunks.push(e.data);
+    rec.onstop = () => resolve(new Blob(chunks, { type: 'video/webm' }));
+    frame = 0; draw(0); rec.start();
+    const t = setInterval(() => {
+      frame++; onProgress(frame / film.total);
+      if (frame >= film.total) { clearInterval(t); rec.stop(); return; }
+      draw(frame);
+    }, 1000 / M.fps);
+  });
+}
+function saveBlob(blob, name) {
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; a.click();
+}
+$('#export').onclick = async () => {
+  $('#export').disabled = true;
+  const blob = await exportWebM(p => { $('#export').textContent = `Export ${Math.round(p * 100)} %`; });
+  saveBlob(blob, `epic-non-${sel.value}-story-1080x1920.webm`);
+  $('#export').disabled = false; $('#export').textContent = 'Exporter WebM';
+};
+
+await document.fonts.load("700 100px 'IBM Plex Sans Condensed'"); await document.fonts.load("600 100px 'IBM Plex Sans'"); await document.fonts.load("400 100px 'IBM Plex Sans'");
+load(sel.value);
+if (params.has('frame')) { frame = +params.get('frame'); draw(frame); }
+if (params.get('embed') === '1') { document.body.classList.add('embed'); if (!params.has('frame')) play(true); }
+// API for the studio (same origin).
+window.studio = {
+  setSegment(seg) { play(false); sel.value = seg; load(seg); if (params.get('embed') === '1') play(true); },
+  play, exportWebM, get film() { return film; },
+  // Offline rendering hooks (tools/render-stories.html): deterministic frame access, no timers.
+  drawFrame(f) { play(false); frame = Math.max(0, Math.min(film.total - 1, f | 0)); draw(frame); return cv; },
+  get total() { return film.total; },
+  get fps() { return M.fps; },
+  get canvas() { return cv; },
+  get segment() { return sel.value; },
+  get segments() { return sys.segmentIds.slice(); },
+  fontsReady: (async () => {
+    // Load every Plex face the film draws with (latin + latin-ext ranges), then wait for all pending loads.
+    const sample = 'AÀÉÈÇÔŒœàéèêëçôûüîï’«»0123456789ĀăŁ';
+    await Promise.all(["700 100px 'IBM Plex Sans Condensed'", "400 100px 'IBM Plex Sans'", "600 100px 'IBM Plex Sans'", "700 100px 'IBM Plex Sans'"]
+      .map(f => document.fonts.load(f, sample)));
+    await document.fonts.ready;
+    return true;
+  })(),
+};
+window.__film = film; window.__ready = true;
+</script>
+</body>
+</html>

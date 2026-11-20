@@ -1,0 +1,1574 @@
+{
+  "$doc": "Library of points. Each point = one idea a broad public can take in at a glance: a title (<= 8 words), an essential line (<= 22 words where possible), a two-sided comparison, and its sources. source.text = short human label (printed on the flyers); source.links = [{text, url, publisher, date}] (rendered as numbered notes on the site); source.url = first link, kept for older renderers. Flyers and site render only from here. 'tbc' = to be confirmed by the committee before print. Optional per point (site and carousels only, never printed on flyers): objection (the opponents' line the point answers), punch (slogan, <= 10 words), analogy (everyday comparison), detail (one extra sentence, <= 40 words), carrousels (ids in the top-level carrousels array). Fact-checked 2026-11-20; carousel merge 2026-11-20 (facts checked against EMPD / RCmaj / RCmin1 / PV 25.08–22.09.2026).",
+  "campaign": {
+    "deadline": "2026-11-28",
+    "deadlineLabel": "Signez avant le 28 novembre",
+    "legalDeadline": "2026-12-05",
+    "threshold": 12000,
+    "thresholdLabel": "12 000 signatures valables en 60 jours pour que le peuple vaudois décide",
+    "url": "epic-non.ch",
+    "qrBase": "https://epic-non.ch/?s={segment}#signer",
+    "signer": "Référendum cantonal vaudois · Comité « Référendum Perte de contrôle » · info@epic-non.ch"
+  },
+  "segments": {
+    "$doc": "Per segment: the recto hook, the word the animated reel lands on, and the points in priority order (first = hero).",
+    "secret": {
+      "hook": "Qui pourra lire votre dossier médical ?",
+      "reel": "votre dossier",
+      "order": [
+        "acces",
+        "metadonnees",
+        "vote",
+        "soins"
+      ]
+    },
+    "soignant": {
+      "hook": "Moderniser, oui. Imposer Epic, non.",
+      "reel": "nos outils de soin",
+      "order": [
+        "ergonomie",
+        "ailleurs",
+        "soins",
+        "alternatives"
+      ]
+    },
+    "suisse": {
+      "hook": "Des données vaudoises sous loi américaine ?",
+      "reel": "nos données",
+      "order": [
+        "acces",
+        "hebergement",
+        "contrat",
+        "controle"
+      ]
+    },
+    "argent": {
+      "hook": "207,6 millions pour dépendre d'un seul fournisseur",
+      "reel": "nos millions",
+      "order": [
+        "dependance",
+        "perimetre",
+        "alternatives",
+        "vote"
+      ]
+    },
+    "egalite": {
+      "hook": "Nos données de santé ne sont pas une marchandise",
+      "reel": "nos vies privées",
+      "order": [
+        "metadonnees",
+        "ia",
+        "dependance",
+        "vote"
+      ]
+    },
+    "ia": {
+      "hook": "Votre dossier médical, lu par une IA ? Des règles d'abord.",
+      "reel": "vos données",
+      "order": [
+        "ia",
+        "acces",
+        "metadonnees",
+        "vote"
+      ]
+    },
+    "technique": {
+      "hook": "Héberger n'est pas contrôler",
+      "reel": "le code",
+      "order": [
+        "hebergement",
+        "controle",
+        "code",
+        "contrat"
+      ]
+    },
+    "region": {
+      "hook": "Un seul logiciel américain pour 11 établissements régionaux",
+      "reel": "votre hôpital",
+      "order": [
+        "alternatives",
+        "perimetre",
+        "dependance",
+        "urgence"
+      ]
+    }
+  },
+  "points": [
+    {
+      "id": "vote",
+      "title": "Sur quoi vote-t-on ?",
+      "essential": "Le référendum vise 113 millions de crédits de l'État, dans un projet de 207,6 millions. L'ancien logiciel sera remplacé de toute façon.",
+      "compare": {
+        "left": {
+          "label": "Si le décret passe",
+          "text": "Epic est déployé au CHUV et dans 11 établissements de la FHV."
+        },
+        "right": {
+          "label": "Si le décret est refusé",
+          "text": "Nouvelle procédure : une autre solution devient possible."
+        }
+      },
+      "source": {
+        "text": "Décret du 22 septembre 2026 : crédits de l'État de 50 et 63 millions, soit 113 millions",
+        "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/8724fbf0-48ab-47de-b2f2-84e27b4a1470/meeting/1033710",
+        "links": [
+          {
+            "text": "Grand Conseil vaudois, séance du 22.09.2026 (2e et 3e débats, adoption définitive)",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/8724fbf0-48ab-47de-b2f2-84e27b4a1470/meeting/1033710",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-09-22"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9 (crédit complémentaire de 63 millions)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          },
+          {
+            "text": "Liste officielle de signatures (décret du 22 septembre 2026 ; FAO 6.10.2026 ; délai 5.12)",
+            "url": "https://epic-non.ch/files/referendum-perte-de-controle-signature-A4-affranchie-final.pdf",
+            "publisher": "Comité référendaire",
+            "date": "2026-10"
+          },
+          {
+            "text": "Mode d'emploi : référendum cantonal (12 000 signatures valables, 60 jours)",
+            "url": "https://www.vd.ch/etat-droit-finances/votations-et-elections/initiatives-et-referendums/mode-demploi-referendum-cantonal",
+            "publisher": "État de Vaud",
+            "date": "2026-11-20"
+          }
+        ]
+      },
+      "segments": [
+        "secret",
+        "argent",
+        "egalite",
+        "ia",
+        "region"
+      ],
+      "punch": "Refuser ce décret, ce n'est pas une catastrophe : c'est une chance de choisir mieux.",
+      "detail": "Si le décret est refusé, le canton devra relancer la procédure : un délai, oui, mais aussi la chance de choisir un système qu'on maîtrise.",
+      "carrousels": [
+        "01",
+        "05",
+        "07",
+        "10"
+      ]
+    },
+    {
+      "id": "acces",
+      "title": "Qui peut accéder à votre dossier ?",
+      "essential": "Le CLOUD Act, loi américaine, peut obliger Epic à livrer les données qu'elle contrôle, même stockées en Suisse. Epic y accédera aussi depuis l'étranger, pour la maintenance.",
+      "compare": {
+        "left": {
+          "label": "Avec Epic",
+          "text": "« A priori soumis » au CLOUD Act, selon le canton lui-même."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Aucun accès sans l'accord du canton et des patients."
+        }
+      },
+      "source": {
+        "text": "CLOUD Act (loi américaine de 2018) ; EMPD et rapport de commission 26_LEG_9",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+        "links": [
+          {
+            "text": "EMPD 26_LEG_9, ch. 10.3.2 (CLOUD Act)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9, annexe Q2–Q3 (« EPIC est ainsi a priori soumis »)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          },
+          {
+            "text": "18 U.S. Code § 2713 (CLOUD Act)",
+            "url": "https://www.law.cornell.edu/uscode/text/18/2713",
+            "publisher": "Cornell LII",
+            "date": "2018-03-23"
+          },
+          {
+            "text": "CLOUD Act Resources",
+            "url": "https://www.justice.gov/criminal/cloud-act-resources",
+            "publisher": "U.S. Department of Justice",
+            "date": "2026-11-20"
+          }
+        ]
+      },
+      "segments": [
+        "secret",
+        "suisse",
+        "ia",
+        "technique"
+      ],
+      "analogy": "Confieriez-vous votre code PIN à une entreprise qui doit obéir à un gouvernement étranger ?",
+      "detail": "Un tribunal américain peut même interdire à Epic de prévenir l'hôpital ou les patient·e·s.",
+      "carrousels": [
+        "01",
+        "02",
+        "04",
+        "05"
+      ]
+    },
+    {
+      "id": "hebergement",
+      "title": "Hébergé en Suisse ne suffit pas",
+      "essential": "Ce qui compte, c'est qui contrôle le logiciel, pas seulement où sont les serveurs.",
+      "compare": {
+        "left": {
+          "label": "Avec Epic",
+          "text": "Serveurs en Suisse, éditeur américain qui y accède pour la maintenance."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Logiciel et accès sous contrôle vaudois."
+        }
+      },
+      "source": {
+        "text": "Rapport de minorité 26_LEG_9, Grand Conseil vaudois",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+        "links": [
+          {
+            "text": "Rapport de minorité 26_LEG_9",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9, annexe Q2 (stockage en Suisse, accès de maintenance)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          }
+        ]
+      },
+      "segments": [
+        "suisse",
+        "technique"
+      ],
+      "objection": "Vos données restent en Suisse.",
+      "punch": "Héberger n'est pas contrôler.",
+      "analogy": "Seriez-vous rassuré·e par un coffre-fort chez vous, si le fabricant en garde une clé et qu'une loi étrangère peut l'obliger à l'ouvrir ? « Chez nous » ne veut pas dire « à nous ».",
+      "carrousels": [
+        "04"
+      ]
+    },
+    {
+      "id": "contrat",
+      "title": "Un contrat ne protège pas",
+      "essential": "Aucun contrat n'empêche un tribunal américain d'ordonner à Epic de livrer des données. Même Microsoft l'a admis sous serment devant le Sénat français.",
+      "compare": {
+        "left": {
+          "label": "Une promesse",
+          "text": "Une clause dans un contrat."
+        },
+        "right": {
+          "label": "Une garantie",
+          "text": "Une architecture qui empêche techniquement l'accès (Zero Trust)."
+        }
+      },
+      "source": {
+        "text": "Audition de Microsoft France, Sénat français, 10.06.2025 ; rapport de minorité 26_LEG_9",
+        "url": "https://senat.fr/compte-rendu-commissions/20250609/ce_commande_publique.html",
+        "links": [
+          {
+            "text": "Audition de Microsoft France, commission d'enquête du Sénat",
+            "url": "https://senat.fr/compte-rendu-commissions/20250609/ce_commande_publique.html",
+            "publisher": "Sénat (France)",
+            "date": "2025-06-10"
+          },
+          {
+            "text": "Rapport de minorité 26_LEG_9",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026"
+          },
+          {
+            "text": "Séance du 22.09.2026 : le Conseil d'État promet « contractuellement une interdiction d'accès aux données »",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/8724fbf0-48ab-47de-b2f2-84e27b4a1470/meeting/1033710",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-09-22"
+          }
+        ]
+      },
+      "segments": [
+        "suisse",
+        "technique"
+      ],
+      "objection": "Le contrat interdira l'accès aux données.",
+      "punch": "Un bon contrat ne demande pas l'impossible.",
+      "detail": "Le Conseil d'État promet une « interdiction d'accès aux données » inscrite au contrat (22 septembre 2026). Mais une entreprise ne peut pas tenir une promesse contraire à son propre droit.",
+      "carrousels": [
+        "01",
+        "08",
+        "09"
+      ]
+    },
+    {
+      "id": "metadonnees",
+      "title": "Même sans lire votre dossier…",
+      "essential": "Les seules traces d'accès (quel service consulte quoi, et quand) peuvent trahir une grossesse, une IVG ou une maladie chronique.",
+      "compare": {
+        "left": {
+          "label": "Le risque",
+          "text": "Les traces de consultation sont exploitables."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Ne collecter que le nécessaire."
+        }
+      },
+      "source": {
+        "text": "Mayer et al., PNAS 2016 (des relevés d'appels suffisent à déduire des maladies)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4878528",
+        "links": [
+          {
+            "text": "Mayer, Mutchler & Mitchell, « Evaluating the privacy properties of telephone metadata »",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4878528",
+            "publisher": "PNAS",
+            "date": "2016-05-16"
+          }
+        ]
+      },
+      "segments": [
+        "secret",
+        "egalite",
+        "ia"
+      ],
+      "detail": "Ce qui sort d'un système, ce ne sont pas que des dossiers : ce sont aussi des traces, qui consulte quoi, quand, à quelle fréquence.",
+      "carrousels": [
+        "04"
+      ]
+    },
+    {
+      "id": "ia",
+      "title": "Et l'intelligence artificielle ?",
+      "essential": "Aucune donnée de patient ne doit être réutilisée ou servir à entraîner une IA sans base légale ni consentement.",
+      "compare": {
+        "left": {
+          "label": "Annoncé",
+          "text": "Soignants américains : dossiers Epic lisibles dans ChatGPT (sept. 2026)."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Des règles avant, pas après."
+        }
+      },
+      "source": {
+        "text": "TechCrunch, 1er septembre 2026",
+        "url": "https://techcrunch.com/2026/09/01/chatgpt-health-adds-epic-integration-for-clinicians-to-import-patient-data/",
+        "links": [
+          {
+            "text": "ChatGPT Health adds Epic integration for clinicians to import patient data",
+            "url": "https://techcrunch.com/2026/09/01/chatgpt-health-adds-epic-integration-for-clinicians-to-import-patient-data/",
+            "publisher": "TechCrunch",
+            "date": "2026-09-01"
+          },
+          {
+            "text": "OpenAI launches Epic integration with ChatGPT for Healthcare",
+            "url": "https://www.techtarget.com/searchhealthit/news/366649994/OpenAI-launches-Epic-integration-with-ChatGPT-for-Healthcare",
+            "publisher": "TechTarget",
+            "date": "2026-09-02"
+          }
+        ]
+      },
+      "segments": [
+        "ia",
+        "egalite"
+      ],
+      "detail": "Rien ne permet de vérifier qu'aucun modèle ne sera entraîné sur ces données : un algorithme nourri aux dossiers vaudois pourrait partir sans qu'un seul nom ne quitte le bâtiment.",
+      "carrousels": [
+        "04"
+      ]
+    },
+    {
+      "id": "dependance",
+      "title": "207,6 millions, un seul fournisseur",
+      "essential": "Une fois un logiciel de cette taille installé, en changer est long et coûteux : on reste captif.",
+      "compare": {
+        "left": {
+          "label": "Avec Epic",
+          "text": "Base propriétaire, sortie longue et coûteuse."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Formats ouverts et porte de sortie."
+        }
+      },
+      "source": {
+        "text": "EMPD 26_LEG_9 : coût d'investissement du projet, 207,6 millions de francs",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+        "links": [
+          {
+            "text": "EMPD 26_LEG_9, coût d'investissement 207,6 millions (tableau 4)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "Hôpitaux vaudois : le Grand Conseil valide le choix du logiciel Epic",
+            "url": "https://latele.ch/articles/hopitaux-vaudois-le-grand-conseil-valide-le-choix-du-logiciel-epic",
+            "publisher": "La Télé (ATS)",
+            "date": "2026-09-22"
+          }
+        ]
+      },
+      "segments": [
+        "argent",
+        "suisse",
+        "egalite",
+        "region"
+      ],
+      "objection": "Tout le monde utilise déjà des logiciels américains.",
+      "punch": "Moins de travail aujourd'hui, moins de maîtrise demain.",
+      "analogy": "Parce que tout le monde partage son mot de passe Netflix, donneriez-vous le code de votre carte bancaire ?",
+      "detail": "La dépendance numérique s'est souvent installée sans qu'on nous demande notre avis. Ici, la décision est publique, et la population peut encore la corriger.",
+      "carrousels": [
+        "01",
+        "03-1",
+        "03-2",
+        "05",
+        "06",
+        "07"
+      ]
+    },
+    {
+      "id": "alternatives",
+      "title": "D'autres choix existent",
+      "essential": "Genève et le Valais construisent ensemble leur propre dossier patient, le DPI+.",
+      "compare": {
+        "left": {
+          "label": "Epic",
+          "text": "Un produit américain, le même pour tous."
+        },
+        "right": {
+          "label": "DPI+ romand et logiciels libres",
+          "text": "Un dossier maîtrisé par nos hôpitaux publics, et du logiciel libre."
+        }
+      },
+      "source": {
+        "text": "HUG et Hôpital du Valais, 2024",
+        "url": "https://www.hug.ch/actualite/hopitaux-universitaires-geneve-lhopital-du-valais-co-construisent-systeme-innovant",
+        "links": [
+          {
+            "text": "Les HUG et l'Hôpital du Valais co-construisent un système d'information clinique innovant",
+            "url": "https://www.hug.ch/actualite/hopitaux-universitaires-geneve-lhopital-du-valais-co-construisent-systeme-innovant",
+            "publisher": "HUG",
+            "date": "2024-05-29"
+          },
+          {
+            "text": "KISIM – Klinikinformationssystem",
+            "url": "https://www.cistec.com/",
+            "publisher": "CISTEC AG",
+            "date": "2026-11-20"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9, p. 5 : proposition de collaboration DPI+ des HUG et de l'Hôpital du Valais au CHUV et à la FHV (12.11.2024)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          }
+        ]
+      },
+      "segments": [
+        "soignant",
+        "technique",
+        "region",
+        "argent"
+      ],
+      "punch": "Les compétences, c'est un investissement, pas un défaut.",
+      "analogy": "Refuseriez-vous le vélo de votre voisin parce qu'il faut pédaler ?",
+      "detail": "En novembre 2024, les HUG et l'Hôpital du Valais ont proposé au CHUV et à la FHV de co-construire avec eux le DPI+. Cette voie demande d'engager du personnel : des compétences et des salaires d'ici.",
+      "carrousels": [
+        "03-1",
+        "03-2",
+        "05",
+        "06",
+        "11"
+      ]
+    },
+    {
+      "id": "ailleurs",
+      "title": "Ailleurs, Epic a déçu",
+      "essential": "En Norvège et au Danemark, les organes de contrôle des finances publiques ont sévèrement critiqué la mise en place d'Epic par les autorités hospitalières.",
+      "compare": {
+        "left": {
+          "label": "Norvège (Midt-Norge), 2024",
+          "text": "Riksrevisjonen : « fortement critiquable », sa note la plus sévère."
+        },
+        "right": {
+          "label": "Danemark (Copenhague), 2018",
+          "text": "Préparation jugée « non professionnelle et critiquable »."
+        }
+      },
+      "source": {
+        "text": "Riksrevisjonen 2024 ; Rigsrevisionen et Statsrevisorerne 2018",
+        "url": "https://www.stortinget.no/globalassets/pdf/dokumentserien/2024-2025/dok3-202425-003.pdf",
+        "links": [
+          {
+            "text": "Riksrevisjonens undersøkelse av Helseplattformen i Midt-Norge, Dokument 3:3 (2024–2025)",
+            "url": "https://www.stortinget.no/globalassets/pdf/dokumentserien/2024-2025/dok3-202425-003.pdf",
+            "publisher": "Riksrevisjonen",
+            "date": "2024-10-23"
+          },
+          {
+            "text": "Beretning nr. 17/2017 om Sundhedsplatformen (avec la remarque des Statsrevisorerne)",
+            "url": "https://cdn.rigsrevisionen.dk/rigsrevisionen/Media/1/9/sr1717.pdf",
+            "publisher": "Rigsrevisionen / Statsrevisorerne",
+            "date": "2018-06-20"
+          }
+        ]
+      },
+      "segments": [
+        "soignant",
+        "argent"
+      ]
+    },
+    {
+      "id": "soins",
+      "title": "Le référendum retarde-t-il les soins ?",
+      "essential": "Non. Ce qui met les soins en danger, c'est un système imposé et mal accompagné.",
+      "compare": {
+        "left": {
+          "label": "Imposé",
+          "text": "Un déploiement décidé d'en haut."
+        },
+        "right": {
+          "label": "Choisi",
+          "text": "Un système adapté aux soignant·e·s."
+        }
+      },
+      "source": {
+        "text": "Rapport de commission 26_LEG_9 ; LEDP, art. 134",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+        "links": [
+          {
+            "text": "Rapport de commission 26_LEG_9 (fin de Soarian, scénarios de calendrier)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          },
+          {
+            "text": "LEDP, art. 134 (vote dans les six mois)",
+            "url": "https://www.lexfind.ch/tolv/219190/fr",
+            "publisher": "Lexfind / BLV 160.01",
+            "date": "2022-01-01"
+          }
+        ]
+      },
+      "segments": [
+        "soignant",
+        "secret"
+      ],
+      "punch": "L'outil le plus important n'est ni un logiciel ni un algorithme : c'est la confiance.",
+      "detail": "Les soignant·e·s ont besoin d'outils modernes, personne ne le conteste. Il ne s'agit pas de refuser le numérique, mais de ne pas sacrifier la confiance qui fonde le soin.",
+      "carrousels": [
+        "02",
+        "07"
+      ]
+    },
+    {
+      "id": "urgence",
+      "title": "« C'est urgent » ?",
+      "essential": "L'urgence est réelle, mais elle vient d'années d'attente. Elle ne justifie pas un mauvais choix.",
+      "compare": {
+        "left": {
+          "label": "Ce qu'on nous dit",
+          "text": "Il faut décider vite."
+        },
+        "right": {
+          "label": "Ce que nous répondons",
+          "text": "Un vote : quelques mois de plus, pour un choix démocratique."
+        }
+      },
+      "source": {
+        "text": "EMPD et rapport 26_LEG_9 (Soarian depuis 2009, fin annoncée en 2021)",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+        "links": [
+          {
+            "text": "EMPD 26_LEG_9 (Soarian depuis 2009, abandon annoncé en 2021, support jusqu'en 2027)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9 (travaux depuis 2022, critiques des soignants)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          }
+        ]
+      },
+      "segments": [
+        "soignant",
+        "region"
+      ],
+      "objection": "Il y a urgence, il faut vite un nouveau logiciel.",
+      "punch": "Dans l'urgence, on essaye de faire mieux, pas plus vite.",
+      "analogy": "Aux urgences, donne-t-on le premier médicament venu ? Non : on vérifie d'abord.",
+      "detail": "Prendre le temps de vérifier n'est pas un frein à la modernisation : c'en est la condition de réussite.",
+      "carrousels": [
+        "07"
+      ]
+    },
+    {
+      "id": "code",
+      "title": "On ne vérifie pas ce qu'on ne peut pas lire",
+      "essential": "Le code d'Epic est fermé : personne ne peut le vérifier librement, et l'analyser sans l'accord de l'éditeur expose à des risques juridiques.",
+      "compare": {
+        "left": {
+          "label": "Avec Epic",
+          "text": "Code fermé, audit risqué (licence, droit d'auteur, DMCA aux États-Unis)."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Code ouvert ou audit indépendant publié."
+        }
+      },
+      "source": {
+        "text": "Rapport de minorité 26_LEG_9 ; DMCA (17 U.S.C. § 1201)",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+        "links": [
+          {
+            "text": "Rapport de minorité 26_LEG_9 (Epic « conserve la maîtrise du code source »)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026"
+          },
+          {
+            "text": "17 U.S. Code § 1201",
+            "url": "https://www.law.cornell.edu/uscode/text/17/1201",
+            "publisher": "Cornell LII",
+            "date": "2026-11-20"
+          },
+          {
+            "text": "Lawrence Lessig, « Code Is Law. On Liberty in Cyberspace »",
+            "url": "https://www.harvardmagazine.com/2000/01/code-is-law-html",
+            "publisher": "Harvard Magazine",
+            "date": "2000-01-01"
+          }
+        ]
+      },
+      "segments": [
+        "technique",
+        "secret",
+        "suisse"
+      ],
+      "punch": "Comment savoir ce qu'Epic fait de nos données ?",
+      "analogy": "Mangeriez-vous des lasagnes si la loi rendait risqué pour A Bon Entendeur de les analyser ?",
+      "detail": "Le juriste Lawrence Lessig l'a résumé en 2000 : « code is law », le code fait loi. Ce qui gouverne un système, ce n'est pas le contrat signé autour, c'est le code qui tourne dedans.",
+      "carrousels": [
+        "04",
+        "08",
+        "09",
+        "10"
+      ]
+    },
+    {
+      "id": "ergonomie",
+      "title": "Un bon test d'usage ne suffit pas",
+      "essential": "Un logiciel agréable à utiliser ne garantit pas, à lui seul, la protection des données ni le secret médical.",
+      "objection": "Les soignant·e·s ont testé Epic et l'ont préféré.",
+      "punch": "Un bel écran ne garde pas le secret.",
+      "analogy": "Achèteriez-vous une voiture après avoir seulement essayé les sièges ?",
+      "detail": "Plus de 150 expert·e·s métiers ont évalué les offres, et plus de 300 collaborateur·trice·s ont découvert les solutions par des cas d'usage en vidéo (EMPD, ch. 6.3). Une évaluation métier mesure l'usage, pas la protection des données.",
+      "compare": {
+        "left": {
+          "label": "Un test d'usage",
+          "text": "Dit si l'outil est pratique au quotidien."
+        },
+        "right": {
+          "label": "Ce qui compte pour nous",
+          "text": "Qui contrôle les données, qui y accède, le secret médical."
+        }
+      },
+      "source": {
+        "text": "EMPD 26_LEG_9, ch. 6.3 (évaluation des offres par les métiers)",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+        "links": [
+          {
+            "text": "EMPD 26_LEG_9, ch. 6.3 D, p. 23 (plus de 150 expert·e·s métiers, plus de 300 collaborateur·trice·s)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "Séance du 25.08.2026, 1er débat (« tous les tests métiers […] favorables à Epic »)",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/0f555c77-d1f2-4ecb-8b3d-b3ec98c42aa4/meeting/1033706",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-08-25"
+          },
+          {
+            "text": "Séance du 01.09.2026 (« 300 […] ont testé ce système »)",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/7bae70f6-0766-4f4c-88be-1c9c328d036f/meeting/1033707",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-09-01"
+          }
+        ]
+      },
+      "segments": [
+        "soignant",
+        "secret",
+        "technique"
+      ],
+      "carrousels": [
+        "02"
+      ]
+    },
+    {
+      "id": "controle",
+      "title": "Qui vérifie ?",
+      "essential": "Un contrat ne vaut que si quelqu'un peut vérifier qu'il est respecté. Le contrôle ne se sous-traite pas.",
+      "punch": "Le contrôle ne se sous-traite pas.",
+      "analogy": "Si une compagnie se débarrassait de ses mécanos, prendriez-vous l'avion chez elle ?",
+      "detail": "Le décret prévoit un audit externe annuel, financier et opérationnel : il porte sur les coûts et la mise en œuvre, pas sur le code ni sur l'accès aux données. L'expert en protection des données n'a qu'une voix consultative.",
+      "compare": {
+        "left": {
+          "label": "Clé en main",
+          "text": "Le savoir-faire reste chez l'éditeur."
+        },
+        "right": {
+          "label": "Ce que nous demandons",
+          "text": "Des compétences internes pour exploiter et vérifier le système."
+        }
+      },
+      "source": {
+        "text": "Décret de gouvernance du 22 septembre 2026, art. 4 et 6 ; rapport de commission (majorité) 26_LEG_9",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+        "links": [
+          {
+            "text": "Rapport de commission 26_LEG_9, p. 36–38 : amendements au décret de gouvernance (art. 4, expert juridique en protection des données, voix consultative ; art. 6 al. 4, audit financier et opérationnel externe annuel)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          },
+          {
+            "text": "Séance du 15.09.2026 (amendements acceptés)",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/a236fdf5-99f1-4ecf-9b42-366d754967a3/meeting/1033709",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-09-15"
+          },
+          {
+            "text": "Séance du 22.09.2026 (adoption définitive du décret de gouvernance, 86-30-10)",
+            "url": "https://www.vd.ch/gc/seances-du-grand-conseil/point-seance/point/8724fbf0-48ab-47de-b2f2-84e27b4a1470/meeting/1033710",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-09-22"
+          },
+          {
+            "text": "Rapport de minorité 26_LEG_9 (Epic « conserve la maîtrise du code source »)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026"
+          }
+        ]
+      },
+      "segments": [
+        "technique",
+        "suisse",
+        "argent",
+        "region"
+      ],
+      "carrousels": [
+        "08",
+        "09",
+        "10"
+      ]
+    },
+    {
+      "id": "perimetre",
+      "title": "Le « tout compris » comme critère",
+      "essential": "L'appel d'offres demandait un outil unique intégré. Des trois offres déposées, une seule remplissait toutes les conditions requises.",
+      "punch": "Moins de travail aujourd'hui, moins de maîtrise demain.",
+      "analogy": "Refuseriez-vous un dentiste parce qu'il ne fait pas aussi épicier ?",
+      "detail": "L'outil devait remplacer, selon l'établissement, jusqu'à 20 logiciels, avec un engagement du fournisseur sur 20 ans. L'une des trois offres, une proposition de développement commun, a été jugée non recevable.",
+      "compare": {
+        "left": {
+          "label": "Leur critère",
+          "text": "Tout chez un seul fournisseur, du logiciel à la maintenance."
+        },
+        "right": {
+          "label": "Ce qui compte pour nous",
+          "text": "Ce qui protège les patient·e·s et le secret médical."
+        }
+      },
+      "source": {
+        "text": "EMPD 26_LEG_9, ch. 5.3.4 et 6.3 (outil unique intégré ; trois offres)",
+        "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+        "links": [
+          {
+            "text": "EMPD 26_LEG_9, ch. 5.3.4, p. 20 (appel d'offres de septembre 2024 pour un outil unique intégré, jusqu'à 20 logiciels remplacés)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "EMPD 26_LEG_9, ch. 6.3, p. 23 (trois offres ; une non recevable ; une seule répondant intégralement aux conditions ; engagement sur 20 ans)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_TexteCE.pdf",
+            "publisher": "Conseil d'État vaudois",
+            "date": "2026-02"
+          },
+          {
+            "text": "Rapport de commission 26_LEG_9, p. 12 (deux offres évaluées jusqu'au bout)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmaj.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026-06-13"
+          },
+          {
+            "text": "Rapport de minorité 26_LEG_9 (alternatives non retenues)",
+            "url": "https://www.vd.ch/fileadmin/user_upload/organisation/gc/fichiers_pdf/2022-2027/26_LEG_9_RCmin1.pdf",
+            "publisher": "Grand Conseil vaudois",
+            "date": "2026"
+          }
+        ]
+      },
+      "segments": [
+        "argent",
+        "region",
+        "technique",
+        "soignant"
+      ],
+      "carrousels": [
+        "03-1",
+        "03-2",
+        "06"
+      ]
+    },
+    {
+      "id": "plusvendu",
+      "title": "Le plus vendu n'est pas le plus sûr",
+      "essential": "Epic domine le marché américain. Cela ne dit rien de la protection de vos données ici.",
+      "objection": "Epic est le plus vendu aux États-Unis.",
+      "detail": "Epic équipe 43,7 % des hôpitaux américains de soins aigus (KLAS 2026, chiffres 2025).",
+      "analogy": "Une étoile Michelin décernée selon le nombre de burgers vendus, ça vous rassurerait ?",
+      "compare": {
+        "left": {
+          "label": "Leur critère",
+          "text": "La part de marché aux États-Unis."
+        },
+        "right": {
+          "label": "Ce qui compte pour nous",
+          "text": "Le secret médical et la maîtrise des données."
+        }
+      },
+      "source": {
+        "text": "KLAS Research, parts de marché 2026 (hôpitaux américains de soins aigus)",
+        "url": "https://klasresearch.com/report/us-acute-care-ehr-market-share-2026/3956",
+        "links": [
+          {
+            "text": "US Acute Care EHR Market Share 2026",
+            "url": "https://klasresearch.com/report/us-acute-care-ehr-market-share-2026/3956",
+            "publisher": "KLAS Research",
+            "date": "2026-05-14"
+          },
+          {
+            "text": "Health systems delay EHR purchases amid uncertainty, rising AI investment (Epic : 43,7 % selon KLAS)",
+            "url": "https://www.techtarget.com/searchhealthit/news/366643293/Health-systems-delay-EHR-purchases-amid-uncertainty-rising-AI-investment",
+            "publisher": "TechTarget",
+            "date": "2026-05-18"
+          }
+        ]
+      },
+      "segments": [
+        "region",
+        "suisse",
+        "soignant",
+        "argent"
+      ],
+      "carrousels": [
+        "11"
+      ]
+    }
+  ],
+  "steps": [
+    "Nationalité suisse, 18 ans révolus, domicile vaudois.",
+    "Une feuille = une seule commune, écrite en haut.",
+    "Chacun·e remplit sa ligne à la main, une seule fois. Qui ne peut pas écrire se fait aider (signature « p.o. »).",
+    "Postez sans timbre avant le 28.11 (délai légal : 5.12). Un timbre collé vous-même fait économiser le comité."
+  ],
+  "closer": "Le secret médical n'est ni de gauche ni de droite.",
+  "carrouselDefaults": {
+    "$doc": "Shared settings for the carousels (merge plan §C.1). Slide 4 { kind: 'signer' } is drawn from campaign (deadline, legalDeadline, url), never from per-carousel text. Captions: body only; captionCta and hashtags are appended by tools/render-carousels.py.",
+    "format": {
+      "width": 1080,
+      "height": 1350,
+      "titleMaxWords": 10,
+      "textMaxWords": 35
+    },
+    "kicker": "RÉFÉRENDUM · PERTE DE CONTRÔLE",
+    "labels": {
+      "accroche": null,
+      "hic": "VOICI OÙ IL Y A UN HIC",
+      "analogie": "AUTREMENT DIT",
+      "objection": "ON NOUS DIT"
+    },
+    "signer": {
+      "label": "Suisse·sse et domicilié·e dans le canton de Vaud ?",
+      "title": "Signez et faites signer le référendum",
+      "text": "Feuille sans timbre à télécharger sur {url}, à renvoyer avant le {deadlineDay} (délai officiel : {legalDeadlineDay}).",
+      "$doc": "User decision 4 (2026-11-20). Generated from campaign.deadline / legalDeadline / url."
+    },
+    "captionCta": "Suisse·sse et domicilié·e dans le canton de Vaud (18 ans révolus) ? Signez et faites signer le référendum : feuille sans timbre à télécharger sur epic-non.ch (le port est payé par le comité), à renvoyer avant le 28 novembre (délai officiel : 5 décembre). Si vous collez vous-même un timbre, vous faites économiser le comité.",
+    "hashtags": "#Vaud #CHUV #Référendum #DonnéesMédicales #SouverainetéNumérique #EpicNon"
+  },
+  "carrousels": [
+    {
+      "id": "01",
+      "slug": "contrat",
+      "pageLabel": "Carrousel 01",
+      "status": "corrige",
+      "title": "Un contrat ne suffit pas",
+      "subtitle": "Un contrat ne protège pas du CLOUD Act",
+      "points": [
+        "contrat",
+        "acces",
+        "dependance",
+        "vote"
+      ],
+      "segments": [
+        "suisse",
+        "secret",
+        "technique",
+        "argent"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Votre dossier médical confié au logiciel de l'américain Epic.",
+          "text": "Problématique ?",
+          "fix": {
+            "was": "Le CHUV va confier vos données médicales à l'américain Epic.",
+            "why": "Report §1 / §2: data stored in Switzerland, Epic is not the host but will have access",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Face à une loi américaine, | un contrat ne suffit pas.",
+          "text": "Le CLOUD Act permet à la justice américaine d'obliger Epic à livrer les données qu'elle contrôle, même stockées en Suisse. Aucune clause ne l'en empêche.",
+          "source": "acces",
+          "fix": {
+            "was": "Après les récents événements… / Un décret présidentiel et les accords passent à la poubelle.",
+            "why": "Unsourced (tariffs, F-35: E.1) and confusable with the décret du 22 septembre; replaced by the sourced points acces/contrat; softer tone (user decision 2)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Notre santé mérite mieux | qu'une promesse impossible à tenir.",
+          "text": "Confieriez-vous votre code PIN à une entreprise qui doit obéir à un gouvernement étranger ? Évidemment que non !",
+          "fix": {
+            "was": "Notre santé mérite mieux qu'un contrat bidon. / …avec des dirigeants étrangers ?",
+            "why": "Softer wording (user decision 2): no « contrat bidon », PIN analogy names the company, not leaders",
+            "type": "langue"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Pour nos données de santé, un contrat ne protège pas contre une loi étrangère.\n\nLe 22 septembre, le Grand Conseil vaudois a validé le choix du logiciel américain Epic pour le dossier patient du CHUV et de onze établissements de la FHV. Un projet de 207,6 millions de francs, dont 113 millions de crédits de l'État visés par le référendum. Le Conseil d'État promet une « interdiction d'accès aux données » inscrite au contrat.\n\nLe problème n'est pas la bonne foi d'Epic. C'est qu'une entreprise américaine ne peut pas tenir certaines promesses face à son propre droit : le CLOUD Act permet à la justice américaine d'obliger Epic à livrer les données qu'elle contrôle, où qu'elles soient hébergées, Lausanne comprise. Et un tribunal peut même lui interdire de prévenir l'hôpital ou les patient·e·s. Un contrat ne protège pas d'une injonction d'un tribunal américain.\n\nUn bon contrat ne demande pas l'impossible. Pour nos données de santé, la seule garantie solide est de ne pas les confier à une entreprise soumise à un droit étranger incompatible avec le nôtre."
+    },
+    {
+      "id": "02",
+      "slug": "adore",
+      "pageLabel": "Carrousel 02",
+      "status": "corrige",
+      "title": "Testé et apprécié",
+      "subtitle": "Une évaluation métier mesure l'usage, pas la protection des données",
+      "points": [
+        "ergonomie",
+        "soins",
+        "acces"
+      ],
+      "segments": [
+        "soignant",
+        "secret",
+        "technique"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Les soignant·e·s ont testé Epic et l'ont préféré.",
+          "text": "Tant mieux. Mais est-ce suffisant ?",
+          "source": "ergonomie",
+          "fix": {
+            "was": "Les soignant·e·s ont testé Epic et l'ont adoré. / Et alors ?",
+            "why": "Verified EMPD 6.3 D p.23 (150+ experts, 300+ staff) and PV 25.08 (« tests métiers … favorables à Epic »): « préféré » matches the sources; softer follow-up",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Un bel écran ne garde pas | le secret.",
+          "text": "Plus de 150 expert·e·s métiers ont évalué les offres. Une évaluation métier mesure l'usage, pas la protection des données.",
+          "source": "ergonomie",
+          "fix": {
+            "was": "On a testé le confort d'utilisation, pas la protection des données ni le secret médical.",
+            "why": "Verified EMPD 6.3 D; nothing documents that data protection was outside the tests' scope, so general statement only",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Pour Epic, les freins | dépendent d'une loi américaine.",
+          "text": "Achèteriez-vous une voiture après avoir seulement essayé les sièges ? Bien sûr que non !",
+          "fix": {
+            "was": "Pour Epic, on n'a même pas regardé les freins.",
+            "why": "The canton did examine the CLOUD Act exposure (« a priori soumis », point acces)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Un logiciel agréable à utiliser ne garantit pas, à lui seul, le secret médical.\n\n« Tous les tests métiers […] favorables à Epic » : l'argument a été entendu au Grand Conseil le 25 août 2026. Plus de 150 expert·e·s métiers des douze établissements ont évalué les offres, et plus de 300 collaborateur·trice·s ont découvert les solutions par des cas d'usage en vidéo (EMPD, ch. 6.3). C'est compréhensible : le logiciel actuel est à bout de souffle, les soignant·e·s le critiquent depuis des années, et ils et elles ont besoin d'outils modernes. Personne ne le conteste.\n\nMais une évaluation métier mesure l'usage, pas la protection des données. Elle ne dit pas qui contrôle les données, qui peut y accéder, ni si le secret médical reste garanti. Or pour des soins de qualité, l'outil le plus important n'est ni un logiciel, ni un algorithme. C'est la confiance."
+    },
+    {
+      "id": "03-1",
+      "slug": "dentiste",
+      "pageLabel": "Carrousel 03",
+      "status": "corrige",
+      "title": "Le dentiste épicier",
+      "subtitle": "Pourquoi les alternatives ont été écartées",
+      "points": [
+        "perimetre",
+        "alternatives",
+        "dependance"
+      ],
+      "segments": [
+        "argent",
+        "region",
+        "technique",
+        "suisse",
+        "soignant"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Les alternatives à Epic | ont été écartées.",
+          "text": "L'appel d'offres demandait un outil unique intégré.",
+          "source": "perimetre",
+          "fix": {
+            "was": "Motif : « pas le même périmètre ».",
+            "why": "Verified EMPD 5.3.4 p.20 (« outil unique intégré »); the quotation is from the plenary (PV 25.08), not the reason given by the tender",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Le « tout compris » | est devenu le critère.",
+          "text": "Trois offres déposées. L'une jugée non recevable. Des deux restantes, une seule remplissait toutes les conditions requises.",
+          "source": "perimetre",
+          "fix": {
+            "was": "Le « tout compris » a éliminé tout le reste. / Elles ne faisaient pas tout à la place du canton. Des patient·e·s à la machine à café.",
+            "why": "Verified EMPD 6.3 p.23; the other offer was evaluated to the end (RCmaj p.12), so « tout éliminé » overstated",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Choisir sur le « tout compris », | c'est oublier l'essentiel.",
+          "text": "Refuseriez-vous un dentiste parce qu'il ne fait pas aussi épicier ? Évidemment que non !",
+          "fix": {
+            "was": "Le canton, lui, a choisi l'épicier… pour refaire le dentier.",
+            "why": "Softer wording (user decision 2)",
+            "type": "langue"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Les alternatives à Epic ont été écartées par un critère : un seul outil qui fasse tout.\n\nL'appel d'offres pour le dossier patient vaudois, publié en septembre 2024, demandait un outil unique intégré, censé remplacer, selon l'établissement, jusqu'à 20 logiciels, avec un engagement du fournisseur sur 20 ans. Trois offres ont été déposées. L'une, une proposition de développement commun, a été jugée non recevable. Des deux offres restantes, une seule remplissait toutes les conditions requises (EMPD, ch. 5.3.4 et 6.3).\n\nFaire du « tout compris » un critère décisif, c'est privilégier ce qui demande le moins d'effort au canton, pas forcément ce qui protège le mieux nos données.\n\nLe bon critère, c'est ce qui protège les patient·e·s et le secret médical. Le reste (développer, adapter, maintenir) s'appelle engager du personnel : des compétences et des salaires d'ici, plutôt que des licences qui partent ailleurs."
+    },
+    {
+      "id": "03-2",
+      "slug": "petit-doigt",
+      "pageLabel": "Carrousel 04",
+      "status": "corrige",
+      "title": "Moins de maîtrise",
+      "subtitle": "Le « tout compris » et la perte de maîtrise",
+      "points": [
+        "perimetre",
+        "dependance",
+        "alternatives"
+      ],
+      "segments": [
+        "argent",
+        "region",
+        "technique",
+        "soignant",
+        "suisse"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Un seul fournisseur | pour tout faire.",
+          "text": "Confortable. Mais qui garde la maîtrise ?",
+          "source": "perimetre",
+          "fix": {
+            "was": "Motif : « pas le même périmètre ».",
+            "why": "As in 03-1 (EMPD 5.3.4 verified)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Moins de travail aujourd'hui, | moins de maîtrise demain.",
+          "text": "Un outil unique, chez un seul fournisseur, engagé sur 20 ans. Le « tout compris » dispense le canton de bâtir ses propres compétences.",
+          "source": "perimetre",
+          "fix": {
+            "was": "…plus aucune maîtrise demain. / Le critère décisif n'était pas la protection des données, mais de tout confier à un seul fournisseur.",
+            "why": "Verified EMPD 5.3.4 / 6.3 (outil unique intégré, engagement sur 20 ans); award weighting not claimed; softer « moins de maîtrise »",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Le canton renonce à la maîtrise | pour moins que ça.",
+          "text": "Renonceriez-vous à votre droit de vote, pour ne plus avoir à faire une croix sur un bout de papier ? Évidemment que non !",
+          "fix": {
+            "was": "Le canton, lui, renonce à la maîtrise pour moins que ça.",
+            "why": "11 words → 10",
+            "type": "length"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Moins de travail aujourd'hui, moins de maîtrise demain.\n\nL'appel d'offres pour le dossier patient vaudois, publié en septembre 2024, demandait un outil unique intégré, censé remplacer, selon l'établissement, jusqu'à 20 logiciels, avec un engagement du fournisseur sur 20 ans. Trois offres ont été déposées. L'une, une proposition de développement commun, a été jugée non recevable. Des deux offres restantes, une seule remplissait toutes les conditions requises (EMPD, ch. 5.3.4 et 6.3).\n\nUn seul fournisseur qui fait tout, c'est confortable. Mais c'est aussi renoncer à bâtir ici les compétences qui permettent d'exploiter, de vérifier et, un jour, de changer de système.\n\nLe bon critère, c'est ce qui protège les patient·e·s et le secret médical. Développer, adapter, maintenir : cela s'appelle engager du personnel, des compétences et des salaires d'ici, plutôt que des licences qui partent ailleurs."
+    },
+    {
+      "id": "04",
+      "slug": "chez-nous",
+      "pageLabel": "Carrousel 05",
+      "status": "corrige",
+      "title": "C'est chez nous",
+      "subtitle": "Héberger n'est pas contrôler",
+      "points": [
+        "hebergement",
+        "code",
+        "metadonnees",
+        "ia",
+        "acces"
+      ],
+      "segments": [
+        "technique",
+        "suisse",
+        "ia",
+        "secret"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Vos données restent en Suisse.",
+          "text": "Rassurant ? Pas tout à fait.",
+          "fix": {
+            "was": "« Vos données restent au CHUV. » / Rassurant ? Ben non !",
+            "why": "Report §1 l.21: stored in Switzerland, host not chosen; softer follow-up",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Héberger | n'est pas contrôler.",
+          "text": "Le logiciel reste fermé : personne ne peut vérifier librement ce qu'il fait, ni ce qui pourrait en sortir (métadonnées, modèles d'IA).",
+          "source": "hebergement",
+          "fix": {
+            "was": "impossible de voir ce qu'il fait, ni ce qui en sort (métadonnées, modèles entraînés)",
+            "why": "§2 l.50 (licensed audit possible); §2 l.53 (no source on training)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "« Chez nous » ne veut pas dire | « à nous ».",
+          "text": "Seriez-vous rassuré·e par un coffre-fort chez vous, si le fabricant en garde une clé et qu'une loi étrangère peut l'obliger à l'ouvrir ? Certainement pas !",
+          "fix": {
+            "was": "…si le fabricant vient se servir dedans ?",
+            "why": "Epic has access and can be compelled; it does not « se servir » (§1 l.21, §2 l.45)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "L'hébergement en Suisse est une garantie importante, mais il ne suffit pas.\n\nOn nous répète que les données resteront stockées en Suisse, sous contrôle du canton. Sauf qu'héberger n'est pas contrôler : le logiciel reste fermé, personne ne peut vérifier librement ce qu'il fait, pas même le canton, car le code appartient à l'éditeur. Et l'éditeur pourra accéder aux données, y compris depuis l'étranger, pour la maintenance.\n\nEt ce qui peut sortir d'un tel système ne se limite pas aux dossiers des patient·e·s : il y a les métadonnées (qui consulte quoi, quand, à quelle fréquence). Et rien ne permet de vérifier qu'aucun modèle ne sera entraîné sur ces données : un algorithme nourri aux dossiers vaudois pourrait partir sans qu'un seul nom ne quitte le bâtiment. C'est pourquoi nous demandons une base légale et un consentement avant tout usage.\n\nLa souveraineté, ce n'est pas seulement savoir où sont les données. C'est maîtriser le logiciel qui les traite."
+    },
+    {
+      "id": "05",
+      "slug": "tout-le-monde",
+      "pageLabel": "Carrousel 06",
+      "status": "pret",
+      "title": "Tout le monde le fait",
+      "subtitle": "Des logiciels américains, mais pour nos données les plus intimes ?",
+      "points": [
+        "dependance",
+        "alternatives",
+        "vote",
+        "acces"
+      ],
+      "segments": [
+        "secret",
+        "suisse",
+        "egalite",
+        "argent"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Tout le monde utilise déjà des logiciels américains.",
+          "text": "Alors, vos dossiers médicaux aussi ?"
+        },
+        {
+          "kind": "hic",
+          "title": "Pour vos données intimes, | le CHUV peut choisir mieux.",
+          "text": "Sur votre téléphone, le choix est compliqué. Un hôpital universitaire, lui, a le choix."
+        },
+        {
+          "kind": "analogie",
+          "title": "On attend plus d'un dossier médical | que d'un compte Netflix.",
+          "text": "Parce que tout le monde partage son mot de passe Netflix, donneriez-vous le code de votre carte bancaire ? Évidemment que non !"
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Si tout le monde utilise des logiciels américains, c'est souvent faute de choix. Un hôpital universitaire, lui, a le choix, et pour nos dossiers médicaux il peut choisir mieux.\n\nOn nous dit : tout est déjà américain. Oui, la dépendance est déjà partout, et c'est justement une raison de ne pas y ajouter nos données les plus intimes : diagnostics, traitements, suivis psychiatriques.\n\nLa dépendance numérique s'est installée parce que, bien souvent, personne ne nous a demandé notre avis. Pour le dossier patient, c'est différent : la décision est publique, et la population peut encore la corriger par référendum.\n\nIl ne s'agit pas de refuser le numérique : il s'agit de refuser qu'on sacrifie, au passage, la confiance qui fonde le soin."
+    },
+    {
+      "id": "06",
+      "slug": "dpi-plus",
+      "pageLabel": "Carrousel 07",
+      "status": "corrige",
+      "title": "La solution partagée",
+      "subtitle": "Le DPI+ des HUG et de l'Hôpital du Valais",
+      "points": [
+        "alternatives",
+        "perimetre",
+        "dependance"
+      ],
+      "segments": [
+        "region",
+        "argent",
+        "soignant",
+        "technique"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Genève et le Valais proposaient de partager leur dossier patient.",
+          "text": "Le Canton a écarté cette piste.",
+          "source": "Rapport de commission 26_LEG_9, p. 5 (proposition du 12.11.2024)",
+          "fix": {
+            "was": "Les HUG proposent de partager leur solution de dossier patient. / Le CHUV ? Non merci.",
+            "why": "Verified RCmaj p.5 (HUG/HVS proposal to CHUV and FHV, 12.11.2024); no explicit refusal is quoted anywhere, the option was set aside",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Écarté, notamment parce qu'il demandait | des compétences ici.",
+          "text": "Le DPI+ s'appuie sur le dossier conçu par les HUG depuis 30 ans. Il demandait de bâtir des compétences ici, et n'aurait pas été prêt avant 2029 selon le DSAS.",
+          "source": "HUG et Hôpital du Valais, 2024 ; EMPD 26_LEG_9, ch. 5.3.4 ; note du DSAS du 18.03.2026",
+          "fix": {
+            "was": "Écarté parce qu'il demandait de faire le job. / Le DPI+ existe déjà, mais il demande…",
+            "why": "Verified EMPD p.20–21 (in-house IT skills, no deployment before 2030) and DSAS note 18.03.2026 (RCmaj annexe p.82: not before 2029)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Les compétences, c'est un investissement, | pas un défaut.",
+          "text": "Refuseriez-vous le vélo de votre voisin parce qu'il faut pédaler ? Bien sûr que non !"
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Une alternative romande existe. Le Canton l'a écartée, notamment parce qu'elle demandait de bâtir des compétences ici.\n\nEn novembre 2024, les HUG et l'Hôpital du Valais ont proposé au CHUV et à la FHV de co-construire avec eux leur dossier patient, le DPI+. Ce système, co-développé depuis 2024, est issu du dossier conçu en interne par les HUG depuis une trentaine d'années. Les HUG ne sont pas un fournisseur : partager une recette, ce n'est pas cuisiner à votre place.\n\nLe Canton a écarté cette piste : elle aurait exigé de bâtir des compétences informatiques ici, et n'aurait pas été prête avant 2029 selon le DSAS. Au Grand Conseil, on nous a répondu : « ce n'est pas le même périmètre » (25 août 2026).\n\nOr les compétences sont un investissement, pas un défaut : des compétences et des salaires vaudois, de l'argent dépensé ici plutôt qu'en licences. Et ce travail profiterait à tout le monde, Genève comprise."
+    },
+    {
+      "id": "07",
+      "slug": "urgence",
+      "pageLabel": "Carrousel 08",
+      "status": "corrige",
+      "title": "C'est urgent",
+      "subtitle": "Une urgence prévisible depuis des années",
+      "points": [
+        "urgence",
+        "soins",
+        "dependance",
+        "vote"
+      ],
+      "segments": [
+        "soignant",
+        "region",
+        "argent",
+        "egalite"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Il y a urgence, il faut vite un nouveau logiciel.",
+          "text": "Pour vingt ans ?",
+          "source": "perimetre",
+          "fix": {
+            "was": "« …pour le CHUV. » / Pour plusieurs décennies ?",
+            "why": "Verified EMPD 6.3 C p.23: the tender required a 20-year commitment from the supplier (named in the caption); paraphrase, so no quotation marks",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Dans l'urgence, on essaye de faire | mieux, pas plus vite.",
+          "text": "L'urgence est réelle, mais prévisible : la fin du logiciel actuel est annoncée depuis 2021. Elle ne doit pas engager le canton sans prendre le temps de vérifier.",
+          "source": "urgence",
+          "fix": {
+            "was": "L'urgence est réelle, mais prévisible depuis une décennie.",
+            "why": "Report §1 l.25 (must fix): the sources contradict that duration; end announced in 2021",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Répondre par l'urgence, ce n'est pas choisir, | c'est y renoncer.",
+          "text": "Aux urgences, donne-t-on le premier médicament venu ? Bien sûr que non : on vérifie d'abord.",
+          "fix": {
+            "was": "…ce n'est pas faire un choix, c'est y renoncer. / En cas d'urgence, vous appelez l'ambulance, pas le corbillard !",
+            "why": "12 words → 10; softer analogy (user decision 2)",
+            "type": "langue"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Une vraie urgence ne justifie pas un mauvais choix pour de longues années.\n\nLe système actuel est à bout de souffle, personne ne le conteste. Mais cette urgence était prévisible : la fin du logiciel actuel est annoncée depuis 2021, et les soignant·e·s le critiquent depuis des années. Et le choix engage loin : l'appel d'offres exigeait du fournisseur un engagement sur 20 ans.\n\nAux urgences, on ne donne pas le premier médicament venu : on vérifie d'abord. Prendre le temps de vérifier qu'une solution répond vraiment aux besoins n'est pas un frein à la modernisation : c'en est la condition de réussite. Et une fois un tel système installé, on ne revient pas facilement en arrière.\n\nSi ce décret est refusé, ce ne sera pas une catastrophe : le canton devra relancer la procédure. Un délai, oui, mais surtout une chance de choisir un système qu'on maîtrise."
+    },
+    {
+      "id": "08",
+      "slug": "verifier",
+      "pageLabel": "Carrousel 09",
+      "status": "corrige",
+      "title": "La marmite",
+      "subtitle": "Vérifier ce que fait vraiment le logiciel",
+      "points": [
+        "code",
+        "controle",
+        "contrat"
+      ],
+      "segments": [
+        "technique",
+        "secret",
+        "suisse",
+        "argent"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Vérifier ce que fait vraiment le logiciel d'Epic ?",
+          "text": "On a le droit ? Des personnes qualifiées ?"
+        },
+        {
+          "kind": "hic",
+          "title": "Comment savoir ce qu'Epic fait | de nos données ?",
+          "text": "Le code est fermé : l'examiner sans l'accord d'Epic expose à des risques juridiques (licence, droit d'auteur, DMCA aux États-Unis). Et qui, ici, saurait le faire ?",
+          "source": "code",
+          "fix": {
+            "was": "…la loi américaine (DMCA) rend compliqué de l'examiner, et il n'est pas prévu d'avoir du personnel pour ça.",
+            "why": "§2 l.50 (licence first, DMCA = US law); « pas de personnel prévu » unsourced → question",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Le canton en commande, | avec un engagement sur vingt ans.",
+          "text": "Mangeriez-vous ces lasagnes si la loi rendait risqué pour A Bon Entendeur de les analyser ? Évidemment que non !",
+          "fix": {
+            "was": "…si la loi interdisait… / en a commandé pour une décennie. Bon appétit !",
+            "why": "The law makes analysis risky, it does not forbid it (§2 l.50); duration verified as the tender's 20-year commitment (EMPD 6.3 C p.23), not a contract length",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "On ne peut pas garantir le secret médical avec un logiciel qu'on ne peut pas examiner librement.\n\nLe logiciel d'Epic est propriétaire et fermé. L'analyser sans l'accord de l'éditeur expose à des risques juridiques : la licence, le droit d'auteur et, aux États-Unis, le DMCA et ses règles anti-contournement. Et l'appel d'offres exigeait du fournisseur un engagement sur vingt ans.\n\nLe juriste Lawrence Lessig l'a résumé en 2000 : « code is law », le code fait loi. Ce qui gouverne un système informatique, ce n'est pas le contrat signé autour, c'est le code qui tourne dedans. Si on ne peut pas lire le code, on ne peut pas vérifier que la loi est respectée.\n\nUn dossier patient doit avoir un code ouvert, ou au minimum un droit d'audit indépendant complet."
+    },
+    {
+      "id": "09",
+      "slug": "qui-verifie",
+      "pageLabel": "Carrousel 10",
+      "status": "corrige",
+      "title": "Qui vérifie",
+      "subtitle": "Un contrat sans contrôle, c'est une promesse",
+      "points": [
+        "controle",
+        "contrat",
+        "code"
+      ],
+      "segments": [
+        "technique",
+        "suisse",
+        "argent",
+        "region"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Le contrat garantit la sécurité de vos données.",
+          "text": "Et qui va le vérifier ?",
+          "fix": {
+            "was": "« Le contrat garantit la sécurité de vos données. »",
+            "why": "Paraphrase, not a sourced quotation: no quotation marks",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Le contrôle | ne se sous-traite pas.",
+          "text": "Le décret prévoit un audit externe annuel, financier et opérationnel : il ne porte ni sur le code ni sur l'accès aux données.",
+          "source": "controle",
+          "fix": {
+            "was": "Un audit externe par an n'y suffit pas. (audit and legal expert « au contrat »)",
+            "why": "Verified: annual audit and legal expert are in the governance decree (art. 6 al. 4, art. 4; RCmaj p.36–38; adopted 22.09), not in the contract; the audit is financial and operational",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Clé en main : le canton risque | de perdre ses mécanos.",
+          "text": "Si une compagnie se débarrassait de ses mécanos, prendriez-vous l'avion chez elle ? Certainement pas !",
+          "fix": {
+            "was": "Le canton, lui, a choisi de se passer de mécanos.",
+            "why": "Nothing shows the IT teams being dropped; only the risk is supported",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Un contrat ne suffit pas si personne n'a les compétences pour vérifier qu'il est respecté.\n\nLes partisans d'Epic misent sur le contrat et sur le décret de gouvernance. Ce décret prévoit un audit financier et opérationnel externe une fois par an : il porte sur les coûts et la mise en œuvre, pas sur le code ni sur l'accès aux données. Et la commission stratégique compte un expert juridique en protection des données, avec voix consultative seulement. Parmi les opposant·e·s, on trouve des spécialistes du numérique : ils misent sur la compétence interne.\n\nCar le contrôle ne se sous-traite pas. Pour exploiter et vérifier un système qui contient nos données les plus intimes, le canton doit garder ses propres compétences. Avec une solution clé en main, il risque de les perdre."
+    },
+    {
+      "id": "10",
+      "slug": "gens-du-metier",
+      "pageLabel": "Carrousel 11",
+      "status": "tbc",
+      "title": "Les gens du métier",
+      "subtitle": "Les député·e·s qui s'y connaissent en informatique",
+      "points": [
+        "vote",
+        "controle",
+        "code"
+      ],
+      "segments": [
+        "technique",
+        "suisse",
+        "region"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "title": "Des député·e·s qui s'y connaissent en informatique ?",
+          "text": "De gauche ou de droite ? C'est non à Epic au CHUV."
+        },
+        {
+          "kind": "hic",
+          "title": "Quand les gens du métier disent non, | demandez-vous pourquoi.",
+          "text": "Au Grand Conseil, selon notre lecture du vote du 22 septembre, les député·e·s de métiers techniques ont très majoritairement voté non, tous partis confondus.",
+          "fix": {
+            "was": "Au Grand Conseil, celles et ceux qui ont une formation technique ont très majoritairement voté non… / …il faut se demander pourquoi.",
+            "why": "Not sourced: the roll call has not been cross-referenced with professions (E.9); title 12 → 9 words. Do not publish before the committee supplies the list.",
+            "type": "tbc"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Le Grand Conseil, lui, a embarqué. | Et nous avec.",
+          "text": "Si la plupart des pilotes refusaient d'embarquer, monteriez-vous à bord ? Évidemment que non !",
+          "fix": {
+            "was": "Si tous les pilotes…",
+            "why": "Slide 2 says « très majoritairement », not « tous »",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Quand les gens du métier disent non, quels que soient leurs partis, il faut se demander pourquoi.\n\nAu Grand Conseil, selon notre lecture du vote nominal du 22 septembre, les député·e·s qui comprennent vraiment comment marchent un ordinateur et un réseau, celles et ceux qui ont une formation ou un métier technique, ont très majoritairement voté non. De gauche à droite de l'hémicycle.\n\nCe n'est pas une question de parti, c'est une question de compétence. Et cela devrait, au minimum, nous faire réfléchir."
+    },
+    {
+      "id": "11",
+      "slug": "plus-vendu",
+      "pageLabel": "Carrousel 12",
+      "status": "corrige",
+      "title": "Le plus vendu",
+      "subtitle": "Le plus vendu n'est pas le plus sûr",
+      "points": [
+        "plusvendu",
+        "alternatives"
+      ],
+      "segments": [
+        "region",
+        "suisse",
+        "argent",
+        "soignant",
+        "technique"
+      ],
+      "slides": [
+        {
+          "kind": "accroche",
+          "label": "ON NOUS DIT",
+          "title": "Epic est le plus vendu aux États-Unis.",
+          "text": "Donc c'est le meilleur ?",
+          "source": "plusvendu",
+          "fix": {
+            "was": "« Epic équipe les plus grands hôpitaux du monde. »",
+            "why": "§2 l.55: dominance verified for the US only (KLAS 2026: 43,7 %)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "hic",
+          "title": "Le plus vendu | n'est pas le plus sûr.",
+          "text": "Être le plus vendu ailleurs ne dit rien de la protection de vos données ici. Et la Suisse produit plusieurs alternatives.",
+          "fix": {
+            "was": "…de nombreuses alternatives.",
+            "why": "§2 l.58: « plusieurs » (KISIM, HUG)",
+            "type": "fact"
+          }
+        },
+        {
+          "kind": "analogie",
+          "title": "Epic, lui, a eu droit au | traitement 3 étoiles.",
+          "text": "Une étoile Michelin décernée selon le nombre de burgers vendus, ça vous rassurerait ? Bien sûr que non !",
+          "fix": {
+            "was": "Epic, eux, ont eu droit…",
+            "why": "Agreement",
+            "type": "langue"
+          }
+        },
+        {
+          "kind": "signer"
+        }
+      ],
+      "caption": "Le plus vendu n'est pas le meilleur choix pour protéger nos données de santé.\n\n« Epic est le plus vendu » : l'argument revient sans cesse. C'est vrai aux États-Unis, où Epic équipe 43,7 % des hôpitaux de soins aigus (KLAS 2026, chiffres 2025). Mais dire qu'un logiciel est le meilleur parce qu'il se vend le plus, c'est donner à McDonald's une place au guide Michelin.\n\nTous les hôpitaux du monde fonctionnent avec un dossier patient, et Epic n'en est qu'un éditeur parmi d'autres. La Suisse en produit plusieurs (KISIM de la société zurichoise CISTEC, le dossier patient des HUG…), et la Suisse romande a déjà une piste : le DPI+, que les HUG et l'Hôpital du Valais co-développent depuis 2024. Il existe aussi des solutions internationales libres, sans frais de licence, comme GNU Health.\n\nPour un hôpital, le bon critère n'est pas la part de marché. C'est ce qui protège les patient·e·s et le secret médical."
+    }
+  ]
+}
